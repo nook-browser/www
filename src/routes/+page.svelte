@@ -1,13 +1,14 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   import { reveal } from "$lib/actions/reveal";
+  export let data: { latest?: { version?: string; slug?: string } | null };
 </script>
 
 <svelte:head>
   <title>Nook Browser - Open Sourcing Arc</title>
   <meta
     name="description"
-    content="Join the Nook Browser Alpha. A minimal, cozy, open-source browser you can shape."
+    content="Join the Nook Browser Waitlist. A minimal, cozy, open-source browser you can shape."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
@@ -46,10 +47,9 @@
           data-tally-overlay="1"
           class="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0f2b1f]
                    px-5 py-2.5 text-sm font-semibold text-[#f9f8f4]
-                   shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] transition
-                   hover:-translate-y-0.5 hover:brightness-[1.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9cb57f]"
+                   shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9cb57f]"
         >
-          Join alpha
+          Join waitlist
         </button>
       </div>
     </nav>
@@ -81,10 +81,10 @@
         data-tally-open="n0XQp9"
         data-tally-width="500"
         data-tally-overlay="1"
-        class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform"
+        class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)]"
         use:reveal={{ animation: "up", delay: 120, distance: 10 }}
       >
-        Join Alpha
+        Join waitlist
       </button>
       <a
         href="https://buymeacoffee.com/nookbrowser"
@@ -92,6 +92,40 @@
         use:reveal={{ animation: "up", delay: 180, distance: 10 }}
       >
         Fund our mission
+      </a>
+    </div>
+
+    <!-- What's new link -->
+    <div class="mt-4" use:reveal={{ animation: "up", delay: 220, distance: 8 }}>
+      <a
+        href={data.latest?.slug
+          ? `/whats-new/${data.latest.slug}`
+          : "/whats-new"}
+        class="inline-flex items-center gap-2 text-sm text-[#07140f]/70 hover:text-[#07140f] transition-colors"
+        aria-label="What's new in Nook"
+      >
+        <span
+          >What’s new in Nook{data.latest?.version
+            ? ` — ${data.latest.version}`
+            : ""}</span
+        >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M7 17L17 7M9 7H17V15"
+            stroke="#07140f"
+            stroke-opacity="0.7"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </a>
     </div>
 
@@ -408,7 +442,7 @@
         class="rounded-3xl border border-[#e2dec7] bg-white/70 p-8 shadow-[0_32px_64px_-44px_rgba(7,20,15,.42)]"
         use:reveal={{ animation: "up", delay: 0 }}
       >
-        <h3 class="text-xl font-bold">Join the Alpha</h3>
+        <h3 class="text-xl font-bold">Join the waitlist</h3>
         <p class="mt-2 text-[#07140f]/70">
           Early access, feedback sessions, and a say in what ships next.
         </p>
