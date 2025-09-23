@@ -1,7 +1,27 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   import { reveal } from "$lib/actions/reveal";
+  import { onMount } from "svelte";
   export let data: { latest?: { version?: string; slug?: string } | null };
+
+  const latest = data?.latest;
+  let showVersionBanner = true;
+
+  onMount(() => {
+    if (!latest?.version) return;
+    /* const key = "nook_whatsnew_dismissed_version";
+    const dismissed =
+      typeof localStorage !== "undefined" ? localStorage.getItem(key) : null;
+    showVersionBanner = dismissed !== latest.version; */
+  });
+
+  function dismissVersionBanner() {
+    /* const key = "nook_whatsnew_dismissed_version";
+    if (latest?.version && typeof localStorage !== "undefined") {
+      localStorage.setItem(key, latest.version);
+    } */
+    showVersionBanner = false;
+  }
 </script>
 
 <svelte:head>
@@ -24,6 +44,46 @@
 
 <!-- PAGE -->
 <div class="min-h-screen antialiased bg-[#f9f8f4] text-[#07140f]">
+  <!-- Floating Banner (What's new) -->
+  {#if showVersionBanner && latest?.version}
+    <div
+      class="fixed //top-5 //left-1/2 -translate-x-1/2 z-50 bottom-5 left-1/2"
+    >
+      <div
+        class="inline-flex items-center gap-2 rounded-full border border-[#0f2b1f]/15 bg-white/80 px-4 py-2 backdrop-blur shadow-[0_10px_24px_-18px_rgba(7,20,15,.25)] hover:bg-white"
+      >
+        <a
+          href={latest?.slug ? `/whats-new/${latest.slug}` : "/whats-new"}
+          class="inline-flex items-center gap-2 text-sm text-[#07140f]/85 hover:text-[#07140f]"
+        >
+          <span class="font-medium">What’s new — {latest.version}</span>
+          <!-- <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 17L17 7M9 7H17V15"
+              stroke="#07140f"
+              stroke-opacity="0.7"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg> -->
+        </a>
+        <button
+          class="ml-1 text-[#07140f]/60 hover:text-[#07140f] cursor-pointer"
+          aria-label="Dismiss what's new banner"
+          on:click={dismissVersionBanner}>✕</button
+        >
+      </div>
+    </div>
+  {/if}
+
   <!-- NAV -->
   <header class="max-w-6xl mx-auto px-6 pt-8">
     <nav class="flex items-center justify-between">
@@ -81,7 +141,7 @@
         data-tally-open="n0XQp9"
         data-tally-width="500"
         data-tally-overlay="1"
-        class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)]"
+        class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
         use:reveal={{ animation: "up", delay: 120, distance: 10 }}
       >
         Join waitlist
@@ -96,17 +156,15 @@
     </div>
 
     <!-- What's new link -->
-    <div class="mt-4" use:reveal={{ animation: "up", delay: 220, distance: 8 }}>
+    <!-- <div class="mt-4" use:reveal={{ animation: "up", delay: 220, distance: 8 }}>
       <a
-        href={data.latest?.slug
-          ? `/whats-new/${data.latest.slug}`
-          : "/whats-new"}
+        href={latest?.slug ? `/whats-new/${latest.slug}` : "/whats-new"}
         class="inline-flex items-center gap-2 text-sm text-[#07140f]/70 hover:text-[#07140f] transition-colors"
         aria-label="What's new in Nook"
       >
         <span
-          >What’s new in Nook{data.latest?.version
-            ? ` — ${data.latest.version}`
+          >What’s new in Nook{latest?.version
+            ? ` — ${latest.version}`
             : ""}</span
         >
         <svg
@@ -128,11 +186,15 @@
         </svg>
       </a>
     </div>
+    -->
+  </section>
 
+  <!-- Video Preview -->
+  <section class="max-w-4xl mx-auto px-6 mt-12">
     <div class="relative mx-auto mt-14 max-w-4xl">
       <figure
         class="group overflow-hidden rounded-2xl border border-[#e2dec7] bg-white/70
-                   shadow-[0_32px_64px_-40px_rgba(7,20,15,.38)] backdrop-blur-sm"
+                 shadow-[0_32px_64px_-40px_rgba(7,20,15,.38)] backdrop-blur-sm"
         use:reveal={{ animation: "scale", delay: 180, duration: 700 }}
       >
         <video
@@ -149,7 +211,7 @@
 
       <div
         class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
-                   bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
+                 bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
       >
         Video I stole from Zen for placeholder purposes.
       </div>
@@ -285,12 +347,6 @@
            hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-40px_rgba(7,20,15,.38)]"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="inline-grid h-9 w-9 place-items-center rounded-full bg-[#9cb57f] font-bold text-[#07140f] ring-1 ring-[#0f2b1f]/10"
-            aria-hidden="true"
-          >
-            1
-          </span>
           <h3 class="font-semibold text-[15px] tracking-tight">
             Spaces, not tab sprawl
           </h3>
@@ -307,12 +363,6 @@
            hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-40px_rgba(7,20,15,.38)]"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="inline-grid h-9 w-9 place-items-center rounded-full bg-[#9cb57f] font-bold text-[#07140f] ring-1 ring-[#0f2b1f]/10"
-            aria-hidden="true"
-          >
-            2
-          </span>
           <h3 class="font-semibold text-[15px] tracking-tight">
             Local-first &amp; private
           </h3>
@@ -328,12 +378,6 @@
            hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-40px_rgba(7,20,15,.38)]"
       >
         <div class="flex items-center gap-3">
-          <span
-            class="inline-grid h-9 w-9 place-items-center rounded-full bg-[#9cb57f] font-bold text-[#07140f] ring-1 ring-[#0f2b1f]/10"
-            aria-hidden="true"
-          >
-            3
-          </span>
           <h3 class="font-semibold text-[15px] tracking-tight">
             Open by design
           </h3>
