@@ -3,6 +3,16 @@
   import favicon from "$lib/assets/favicon.svg";
 
   let { children } = $props();
+
+  const siteUrl = "https://browsewithnook.com";
+  const siteName = "Nook Browser";
+  const defaultTitle = "Nook Browser — Open Sourcing Arc";
+  const defaultDesc =
+    "Open-source. Private by default. Better Arc without the noise.";
+  const ogImage = `${siteUrl}/og-default.png`;
+  const twitterHandle = "@browsewithnook";
+
+  let hideBanner = false;
 </script>
 
 <svelte:head>
@@ -35,16 +45,49 @@
 
   <meta name="theme-color" content="#0f2b1f" />
 
-  <meta property="og:title" content="Nook Browser — Open Sourcing Arc" />
-  <meta
-    property="og:description"
-    content="Open-source. Private by default. Better Arc without the noise."
-  />
+  <!-- Primary SEO -->
+  <meta name="description" content={defaultDesc} />
+  <link rel="canonical" href={siteUrl + "/"} />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="LOREM IPSUM" />
-  <meta property="og:url" content="LOREM IPSUM/" />
-  <meta name="twitter:card" content="LOREM IPSUM" />
-  <link rel="canonical" href="LOREM IPSUM/" />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={defaultTitle} />
+  <meta property="og:description" content={defaultDesc} />
+  <meta property="og:url" content={siteUrl + "/"} />
+  <meta property="og:image" content={ogImage} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content={twitterHandle} />
+  <meta name="twitter:title" content={defaultTitle} />
+  <meta name="twitter:description" content={defaultDesc} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: siteName,
+      url: siteUrl + '/',
+      logo: siteUrl + '/favicon.svg',
+      sameAs: ['https://x.com/browsewithnook','https://github.com/nook-browser']
+    })}
+  </script>
+  <script type="application/ld+json">
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: siteName,
+      url: siteUrl + '/',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: siteUrl + '/search?q={query}',
+        'query-input': 'required name=query'
+      }
+    })}
+  </script>
 </svelte:head>
 
 {@render children?.()}
