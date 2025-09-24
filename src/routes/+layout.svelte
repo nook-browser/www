@@ -6,16 +6,14 @@
 
   const siteUrl = "https://browsewithnook.com";
   const siteName = "Nook Browser";
-  const defaultTitle = "Nook Browser — Open Sourcing Arc";
-  const defaultDesc =
-    "Open-source. Private by default. Better Arc without the noise.";
+  const defaultTitle = "Nook Browser — Keeping what we love, open";
+  const defaultDesc = "Open-source, Private, Yours forever.";
   const ogImage = `${siteUrl}/og-default.png`;
   const twitterHandle = "@browsewithnook";
-
-  let hideBanner = false;
 </script>
 
 <svelte:head>
+  <meta name="theme-color" content="#F9F8F4" />
   <link rel="icon" href={favicon} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
