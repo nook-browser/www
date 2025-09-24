@@ -14,6 +14,7 @@
 </script>
 
 <svelte:head>
+  <meta name="theme-color" content="#F9F8F4" />
   <link rel="icon" href={favicon} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
