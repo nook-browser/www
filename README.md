@@ -1,6 +1,6 @@
 # Nook Browser — Waitlist & Changelog
 
-[![Live](https://img.shields.io/badge/Live-browsewithnook.com-0f2b1f)](https://browsewithnook.com)
+[![Live](https://img.shields.io/badge/Live-browsewithnook.com-0f2b1f)](https://nook-www-preview.vercel.app)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/TjSybMAa)
 [![Roadmap](https://img.shields.io/badge/Roadmap-View-0f2b1f)](https://browsewithnook.com/roadmap)
 ![Built with SvelteKit](https://img.shields.io/badge/Built%20with-SvelteKit-ff3e00?logo=svelte&logoColor=white)
