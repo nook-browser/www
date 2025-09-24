@@ -1,40 +1,33 @@
-# Preview on [`Vercel`](https://nook-www-preview.vercel.app)
+# Nook Browser — Waitlist & Changelog
 
-# sv
+[![Live](https://img.shields.io/badge/Live-browsewithnook.com-0f2b1f)](https://browsewithnook.com)
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/TjSybMAa)
+[![Roadmap](https://img.shields.io/badge/Roadmap-View-0f2b1f)](https://browsewithnook.com/roadmap)
+![Built with SvelteKit](https://img.shields.io/badge/Built%20with-SvelteKit-ff3e00?logo=svelte&logoColor=white)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A minimal, cozy landing page/changelog for the Nook Browser with a Sanity-powered changelog and a GitHub-backed roadmap.
 
-## Creating a project
+![Cover](static/og-default.png)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Quick start
 
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```bash
+pnpm i        # or npm i / yarn
+pnpm dev      # start dev server
+pnpm build    # build for production
+pnpm preview  # preview production build
 ```
 
-## Developing
+## Environment
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Create `.env` (or set in your host):
 
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```env
+PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+PUBLIC_SANITY_DATASET=production
 ```
 
-## Building
+## Links
 
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- Site: ~~https://browsewithnook.com~~ (Future) https://nook-www-preview.vercel.app
+- Discord: https://discord.gg/TjSybMAa

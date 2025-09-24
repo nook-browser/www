@@ -141,7 +141,7 @@
         data-tally-open="n0XQp9"
         data-tally-width="500"
         data-tally-overlay="1"
-        class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
+        class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)]"
         use:reveal={{ animation: "up", delay: 120, distance: 10 }}
       >
         Join waitlist
@@ -204,7 +204,7 @@
         href="https://x.com/browsewithnook"
         target="_blank"
         rel="noopener"
-        aria-label="X (formerly Twitter)"
+        aria-label="X (FKA Twitter)"
         class="h-10 flex items-center justify-center hover:opacity-90 transition"
         use:reveal={{ animation: "up", delay: 180 }}
       >
@@ -701,7 +701,7 @@
         <a
           class="hover:text-[#07140f]"
           href="https://x.com/browsewithnook"
-          rel="noopener">X (formerly Twitter)</a
+          rel="noopener">X (FKA Twitter)</a
         >
         <a
           class="hover:text-[#07140f]"
