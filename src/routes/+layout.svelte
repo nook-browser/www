@@ -1,6 +1,8 @@
 <script lang="ts">
   import "../app.css";
   import favicon from "$lib/assets/favicon.svg";
+  import { dev } from "$app/environment";
+  import { injectAnalytics } from "@vercel/analytics/sveltekit";
 
   let { children } = $props();
 
@@ -10,6 +12,8 @@
   const defaultDesc = "Open-source, Private, Yours forever.";
   const ogImage = `${siteUrl}/og-default.png`;
   const twitterHandle = "@browsewithnook";
+
+  injectAnalytics({ mode: dev ? "development" : "production" });
 </script>
 
 <svelte:head>
