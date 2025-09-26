@@ -90,6 +90,8 @@
       }
     })}
   </script>
+
+  let showBanner = true;
 </svelte:head>
 
 <div class="dev-banner">
