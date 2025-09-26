@@ -89,9 +89,10 @@
         'query-input': 'required name=query'
       }
     })}
-  </script>
 
-  let showBanner = true;
+
+    let showBanner = true;
+  </script>
 </svelte:head>
 
 <div class="dev-banner">
