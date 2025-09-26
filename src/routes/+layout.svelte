@@ -92,4 +92,46 @@
   </script>
 </svelte:head>
 
+<div class="dev-banner">
+    🚧 This is a <strong>Developer Preview</strong>. Things may change!
+    <button class="close-btn" on:click={() => (showBanner = false)}>×</button>
+</div>
+
 {@render children?.()}
+
+<style>
+  .dev-banner {
+    background: #fef3c7; /* amber-100 */
+    color: #92400e; /* amber-800 */
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid #fcd34d;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .dev-banner strong {
+    font-weight: 700;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    margin-left: auto;
+  }
+
+  .close-btn:hover {
+    opacity: 0.7;
+  }
+</style>
