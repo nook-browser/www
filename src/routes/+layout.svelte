@@ -14,6 +14,9 @@
   const twitterHandle = "@browsewithnook";
 
   injectAnalytics({ mode: dev ? "development" : "production" });
+
+  import Logo from "$lib/components/Logo.svelte";
+  import { reveal } from "$lib/actions/reveal";
 </script>
 
 <svelte:head>
@@ -90,14 +93,7 @@
       }
     })}
   </script>
-</svelte:head>
 
-<script lang="ts">
-  import Logo from "$lib/components/Logo.svelte";
-  import { reveal } from "$lib/actions/reveal";
-</script>
-
-<svelte:head>
   <title>Nook Browser — Coming soon</title>
 </svelte:head>
 
