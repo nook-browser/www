@@ -1,6 +1,7 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   import { reveal } from "$lib/actions/reveal";
+  import Footer from "$lib/components/Footer.svelte";
   export let data: {
     team: Array<{
       login: string;
@@ -130,14 +131,11 @@
                   <p class="text-xs text-[#07140f]/60 truncate">
                     {m.role || `@${m.login}`}
                   </p>
-                  <span
-                    onclick={() => {
-                      window.location.href = `mailto:${m.email}`;
-                    }}
-                    class="text-xs text-[#07140f]/40 truncate mt-2 hover:text-[#07140f]"
-                  >
-                    {m.email}
-                  </span>
+                  {#if m.email}
+                    <span class="block text-xs text-[#07140f]/40 truncate mt-2"
+                      >{m.email}</span
+                    >
+                  {/if}
                 </div>
                 <svg
                   class="h-4 w-4 text-[#07140f]/50 group-hover:text-[#07140f] transition"
@@ -235,35 +233,5 @@
     </div>
   </section>
 
-  <!-- MINIMAL FOOTER -->
-  <footer class="max-w-6xl mx-auto px-6 mt-24 pb-12 text-sm text-[#07140f]/65">
-    <div
-      class="rounded-2xl border border-[#e2dec7] bg-white/70 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
-      use:reveal={{ animation: "up", delay: 0 }}
-    >
-      <div>
-        <p class="font-semibold text-[#07140f]">Nook Browser</p>
-        <p class="text-[#07140f]/65">
-          Open-source • local-first • cozy by design
-        </p>
-      </div>
-      <div class="flex items-center gap-5">
-        <a class="hover:text-[#07140f]" href="/whats-new">What's New</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://github.com/nook-browser"
-          rel="noopener">GitHub</a
-        >
-        <a class="hover:text-[#07140f]" href="/roadmap">Roadmap</a>
-        <a class="hover:text-[#07140f]" href="/team">Team</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://discord.gg/2gX69DuWwX"
-          rel="noopener">Discord</a
-        >
-        <a class="hover:text-[#07140f]" href="/support">Support</a>
-      </div>
-    </div>
-    <p class="mt-4 text-center">© {new Date().getFullYear()} Nook Browser</p>
-  </footer>
+  <Footer />
 </div>

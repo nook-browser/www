@@ -1,6 +1,7 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   import { reveal } from "$lib/actions/reveal";
+  import Footer from "$lib/components/Footer.svelte";
 
   import { styleForTag, pickTag, TAG_PRIORITY } from "$lib/changelog/data";
   export let data: { entries: Array<any> };
@@ -268,48 +269,7 @@
     </div>
   </section>
 
-  <!-- MINIMAL FOOTER -->
-  <footer class="max-w-6xl mx-auto px-6 mt-24 pb-12 text-sm text-[#07140f]/65">
-    <div
-      class="rounded-2xl border border-[#e2dec7] bg-white/70 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
-      use:reveal={{ animation: "up", delay: 0 }}
-    >
-      <div>
-        <p class="font-semibold text-[#07140f]">Nook Browser</p>
-        <p class="text-[#07140f]/65">
-          Open-source • local-first • cozy by design
-        </p>
-      </div>
-      <div class="flex items-center gap-5">
-        <a class="hover:text-[#07140f]" href="/team">Team</a>
-        <a class="hover:text-[#07140f]" href="/support">Support</a>
-        <a class="hover:text-[#07140f]" href="/whats-new">What's New</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://github.com/nook-browser"
-          rel="noopener">GitHub</a
-        >
-        <a class="hover:text-[#07140f]" href="/roadmap">Roadmap</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://discord.gg/2gX69DuWwX"
-          rel="noopener">Discord</a
-        >
-        <a
-          class="hover:text-[#07140f]"
-          href="https://x.com/browsewithnook"
-          rel="noopener">X</a
-        >
-        <a
-          class="hover:text-[#07140f]"
-          href="https://buymeacoffee.com/nookbrowser"
-          rel="noopener"
-          target="_blank">Fund</a
-        >
-      </div>
-    </div>
-    <p class="mt-4 text-center">© {new Date().getFullYear()} Nook Browser</p>
-  </footer>
+  <Footer />
 </div>
 
 <style>

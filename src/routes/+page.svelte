@@ -1,6 +1,7 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   import { reveal } from "$lib/actions/reveal";
+  import Footer from "$lib/components/Footer.svelte";
   import { onMount } from "svelte";
   export let data: {
     latest?: { version?: string; slug?: string } | null;
@@ -94,7 +95,7 @@
         <Logo className="w-10 h-10" />
         <span class="font-semibold text-xl logo-font">nook browser</span>
       </a>
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <a
           href="https://github.com/nook-browser"
           rel="noopener"
@@ -171,7 +172,7 @@
       </a>
     </div>
 
-    <div class="flex items-center justify-center mt-6 gap-6">
+    <div class="flex flex-wrap items-center justify-center mt-6 gap-6">
       <a
         href="https://github.com/nook-browser"
         target="_blank"
@@ -720,21 +721,21 @@
         <ul class="mt-5 space-y-3 text-[15px]">
           <li class="flex items-start gap-3">
             <span
-              class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
+              class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
             A modern, minimal browser built for you
           </li>
           <li class="flex items-start gap-3">
             <span
-              class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
+              class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
             Local-first data, data never leaves your device
           </li>
           <li class="flex items-start gap-3">
             <span
-              class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
+              class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
             Community roadmap & extensions support
@@ -771,21 +772,21 @@
         <ul class="mt-4 space-y-3 text-[15px]">
           <li class="flex items-start gap-3">
             <span
-              class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
+              class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
             See our full changelog and release notes
           </li>
           <li class="flex items-start gap-3">
             <span
-              class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
+              class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
             Get updates on our latest features and improvements
           </li>
           <li class="flex items-start gap-3">
             <span
-              class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
+              class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
             Join our community and get support from the developers
@@ -839,46 +840,5 @@
     </div>
   </section>
 
-  <!-- MINIMAL FOOTER -->
-  <footer class="max-w-6xl mx-auto px-6 mt-24 pb-12 text-sm text-[#07140f]/65">
-    <div
-      class="rounded-2xl border border-[#e2dec7] bg-white/70 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
-      use:reveal={{ animation: "up", delay: 0 }}
-    >
-      <div>
-        <p class="font-semibold text-[#07140f]">Nook Browser</p>
-        <p class="text-[#07140f]/65">
-          Open-source • local-first • cozy by design
-        </p>
-      </div>
-      <div class="flex items-center gap-5">
-        <a class="hover:text-[#07140f]" href="/team">Team</a>
-        <a class="hover:text-[#07140f]" href="/support">Support</a>
-        <a class="hover:text-[#07140f]" href="/whats-new">What's New</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://github.com/nook-browser"
-          rel="noopener">GitHub</a
-        >
-        <a class="hover:text-[#07140f]" href="/roadmap">Roadmap</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://discord.gg/2gX69DuWwX"
-          rel="noopener">Discord</a
-        >
-        <a
-          class="hover:text-[#07140f]"
-          href="https://x.com/browsewithnook"
-          rel="noopener">X</a
-        >
-        <a
-          class="hover:text-[#07140f]"
-          href="https://buymeacoffee.com/nookbrowser"
-          rel="noopener"
-          target="_blank">Fund</a
-        >
-      </div>
-    </div>
-    <p class="mt-4 text-center">© {new Date().getFullYear()} Nook Browser</p>
-  </footer>
+  <Footer />
 </div>

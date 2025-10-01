@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+html,
+body {
+  overflow-x: hidden;
+}
+video {
+  object-fit: cover;
+}
+
 .instrument-serif-regular-italic {
   font-family: "Instrument Serif", serif;
   font-weight: 400;

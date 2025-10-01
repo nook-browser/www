@@ -1,6 +1,7 @@
 <script lang="ts">
   import { reveal } from "$lib/actions/reveal";
   import Logo from "$lib/components/Logo.svelte";
+  import Footer from "$lib/components/Footer.svelte";
   export let data:
     | {
         ok: true;
@@ -85,7 +86,7 @@
     <nav class="flex items-center justify-between">
       <a href="/" class="flex items-center gap-3">
         <Logo className="w-10 h-10" />
-        <span class="font-semibold text-xl logo-font">Nook Browser</span>
+        <span class="font-semibold text-xl logo-font">nook browser</span>
       </a>
       <div class="flex items-center gap-2">
         <a
@@ -375,46 +376,5 @@
     {/if}
   </section>
 
-  <!-- MINIMAL FOOTER -->
-  <footer class="max-w-6xl mx-auto px-6 mt-24 pb-12 text-sm text-[#07140f]/65">
-    <div
-      class="rounded-2xl border border-[#e2dec7] bg-white/70 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
-      use:reveal={{ animation: "up", delay: 0 }}
-    >
-      <div>
-        <p class="font-semibold text-[#07140f]">Nook Browser</p>
-        <p class="text-[#07140f]/65">
-          Open-source • local-first • cozy by design
-        </p>
-      </div>
-      <div class="flex items-center gap-5">
-        <a class="hover:text-[#07140f]" href="/support">Support</a>
-        <a class="hover:text-[#07140f]" href="/team">Team</a>
-        <a class="hover:text-[#07140f]" href="/whats-new">What's New</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://github.com/nook-browser"
-          rel="noopener">GitHub</a
-        >
-        <a class="hover:text-[#07140f]" href="/roadmap">Roadmap</a>
-        <a
-          class="hover:text-[#07140f]"
-          href="https://discord.gg/2gX69DuWwX"
-          rel="noopener">Discord</a
-        >
-        <a
-          class="hover:text-[#07140f]"
-          href="https://x.com/browsewithnook"
-          rel="noopener">X</a
-        >
-        <a
-          class="hover:text-[#07140f]"
-          href="https://buymeacoffee.com/nookbrowser"
-          rel="noopener"
-          target="_blank">Fund</a
-        >
-      </div>
-    </div>
-    <p class="mt-4 text-center">© {new Date().getFullYear()} Nook Browser</p>
-  </footer>
+  <Footer />
 </div>
