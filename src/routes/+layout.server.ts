@@ -10,9 +10,15 @@ const GROQ_LATEST = `
 
 export const load: LayoutServerLoad = async ({ fetch }) => {
   try {
-    const latest = await sanityQuery(GROQ_LATEST, {}, fetch as any);
-    return { latest };
+    const [latest, repo] = await Promise.all([
+      sanityQuery(GROQ_LATEST, {}, fetch as any),
+      fetch("https://api.github.com/repos/nook-browser/nook").then((r) =>
+        r.ok ? r.json() : null
+      ),
+    ]);
+    const stars = repo?.stargazers_count ?? null;
+    return { latest, stars };
   } catch {
-    return { latest: null };
+    return { latest: null, stars: null };
   }
 };

@@ -2,30 +2,33 @@
   import Logo from "$lib/components/Logo.svelte";
   import { reveal } from "$lib/actions/reveal";
   import { onMount } from "svelte";
-  export let data: { latest?: { version?: string; slug?: string } | null };
+  export let data: {
+    latest?: { version?: string; slug?: string } | null;
+    stars?: number | null;
+  };
 
   const latest = data?.latest;
-  let showVersionBanner = true;
+  let showVersionBanner = false;
 
   onMount(() => {
     if (!latest?.version) return;
-    /* const key = "nook_whatsnew_dismissed_version";
+    const key = "nook_whatsnew_dismissed_version";
     const dismissed =
       typeof localStorage !== "undefined" ? localStorage.getItem(key) : null;
-    showVersionBanner = dismissed !== latest.version; */
+    showVersionBanner = dismissed !== latest.version;
   });
 
   function dismissVersionBanner() {
-    /* const key = "nook_whatsnew_dismissed_version";
+    const key = "nook_whatsnew_dismissed_version";
     if (latest?.version && typeof localStorage !== "undefined") {
       localStorage.setItem(key, latest.version);
-    } */
+    }
     showVersionBanner = false;
   }
 </script>
 
 <svelte:head>
-  <title>Nook Browser - Keeping what we love, open</title>
+  <title>Nook Browser - Open Sourcing Arc</title>
   <meta
     name="description"
     content="Join the Nook Browser Waitlist. A minimal, cozy, open-source browser you can shape."
@@ -50,13 +53,13 @@
       class="fixed //top-5 //left-1/2 -translate-x-1/2 z-50 bottom-5 left-1/2"
     >
       <div
-        class="inline-flex items-center gap-2 rounded-full border border-[#0f2b1f]/15 bg-white/80 px-4 py-2 backdrop-blur shadow-[0_10px_24px_-18px_rgba(7,20,15,.25)] hover:bg-white"
+        class="inline-flex items-center gap-2 rounded-full border border-[#0f2b1f]/15 bg-white/80 px-4 py-2 backdrop-blur shadow-[0_10px_24px_-18px_rgba(7,20,15,.25)] hover:bg-white transition-colors duration-200 ease-in-out"
       >
         <a
           href={latest?.slug ? `/whats-new/${latest.slug}` : "/whats-new"}
           class="inline-flex items-center gap-2 text-sm text-[#07140f]/85 hover:text-[#07140f]"
         >
-          <span class="font-medium">What’s new — {latest.version}</span>
+          <span class="font-medium">What's new — {latest.version}</span>
           <!-- <svg
             width="14"
             height="14"
@@ -89,7 +92,7 @@
     <nav class="flex items-center justify-between">
       <a href="/" class="flex items-center gap-3">
         <Logo className="w-10 h-10" />
-        <span class="font-semibold text-xl logo-font">Nook Browser</span>
+        <span class="font-semibold text-xl logo-font">nook browser</span>
       </a>
       <div class="flex items-center gap-2">
         <a
@@ -97,15 +100,28 @@
           rel="noopener"
           class="hidden rounded-full border border-[#0f2b1f]/15 bg-white/70 px-5 py-2.5 text-sm font-medium
                    shadow-[0_8px_18px_-14px_rgba(7,20,15,.25)] hover:bg-white focus:outline-none
-                   focus-visible:ring-2 focus-visible:ring-[#9cb57f] md:inline-flex"
+                   focus-visible:ring-2 focus-visible:ring-[#9cb57f] md:inline-flex items-center justify-center gap-1.5"
         >
+          <svg
+            class="h-4 w-auto cursor-pointer"
+            viewBox="0 0 1024 1024"
+            fill="#333"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+              transform="scale(64)"
+            />
+          </svg>
           GitHub
         </a>
         <button
           data-tally-open="n0XQp9"
           data-tally-width="520"
           data-tally-overlay="1"
-          class="hidden md:inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0f2b1f]
+          class="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0f2b1f]
                    px-5 py-2.5 text-sm font-semibold text-[#f9f8f4]
                    shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9cb57f]"
         >
@@ -180,7 +196,7 @@
       </a>
 
       <a
-        href="https://discord.gg/TjSybMAa"
+        href="https://discord.gg/2gX69DuWwX"
         target="_blank"
         rel="noopener"
         aria-label="Join our Discord"
@@ -220,7 +236,46 @@
       </a>
 
       <a
-        href="https://www.producthunt.com/"
+        href="https://www.instagram.com/browsewithnook/"
+        target="_blank"
+        rel="noopener"
+        aria-label="X (FKA Twitter)"
+        class="h-10 flex items-center justify-center hover:opacity-90 transition"
+        use:reveal={{ animation: "up", delay: 180 }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-auto cursor-pointer"
+          preserveAspectRatio="xMidYMid"
+          viewBox="0 0 256 256"
+          ><path
+            fill="#333"
+            d="M128 23.064c34.177 0 38.225.13 51.722.745 12.48.57 19.258 2.655 23.769 4.408 5.974 2.322 10.238 5.096 14.717 9.575 4.48 4.479 7.253 8.743 9.575 14.717 1.753 4.511 3.838 11.289 4.408 23.768.615 13.498.745 17.546.745 51.723 0 34.178-.13 38.226-.745 51.723-.57 12.48-2.655 19.257-4.408 23.768-2.322 5.974-5.096 10.239-9.575 14.718-4.479 4.479-8.743 7.253-14.717 9.574-4.511 1.753-11.289 3.839-23.769 4.408-13.495.616-17.543.746-51.722.746-34.18 0-38.228-.13-51.723-.746-12.48-.57-19.257-2.655-23.768-4.408-5.974-2.321-10.239-5.095-14.718-9.574-4.479-4.48-7.253-8.744-9.574-14.718-1.753-4.51-3.839-11.288-4.408-23.768-.616-13.497-.746-17.545-.746-51.723 0-34.177.13-38.225.746-51.722.57-12.48 2.655-19.258 4.408-23.769 2.321-5.974 5.095-10.238 9.574-14.717 4.48-4.48 8.744-7.253 14.718-9.575 4.51-1.753 11.288-3.838 23.768-4.408 13.497-.615 17.545-.745 51.723-.745M128 0C93.237 0 88.878.147 75.226.77c-13.625.622-22.93 2.786-31.071 5.95-8.418 3.271-15.556 7.648-22.672 14.764C14.367 28.6 9.991 35.738 6.72 44.155 3.555 52.297 1.392 61.602.77 75.226.147 88.878 0 93.237 0 128c0 34.763.147 39.122.77 52.774.622 13.625 2.785 22.93 5.95 31.071 3.27 8.417 7.647 15.556 14.763 22.672 7.116 7.116 14.254 11.492 22.672 14.763 8.142 3.165 17.446 5.328 31.07 5.95 13.653.623 18.012.77 52.775.77s39.122-.147 52.774-.77c13.624-.622 22.929-2.785 31.07-5.95 8.418-3.27 15.556-7.647 22.672-14.763 7.116-7.116 11.493-14.254 14.764-22.672 3.164-8.142 5.328-17.446 5.95-31.07.623-13.653.77-18.012.77-52.775s-.147-39.122-.77-52.774c-.622-13.624-2.786-22.929-5.95-31.07-3.271-8.418-7.648-15.556-14.764-22.672C227.4 14.368 220.262 9.99 211.845 6.72c-8.142-3.164-17.447-5.328-31.071-5.95C167.122.147 162.763 0 128 0Zm0 62.27C91.698 62.27 62.27 91.7 62.27 128c0 36.302 29.428 65.73 65.73 65.73 36.301 0 65.73-29.428 65.73-65.73 0-36.301-29.429-65.73-65.73-65.73Zm0 108.397c-23.564 0-42.667-19.103-42.667-42.667S104.436 85.333 128 85.333s42.667 19.103 42.667 42.667-19.103 42.667-42.667 42.667Zm83.686-110.994c0 8.484-6.876 15.36-15.36 15.36-8.483 0-15.36-6.876-15.36-15.36 0-8.483 6.877-15.36 15.36-15.36 8.484 0 15.36 6.877 15.36 15.36Z"
+          /></svg
+        >
+      </a>
+
+      <!-- <a
+        href="https://www.reddit.com/r/nook_browser"
+        target="_blank"
+        rel="noopener"
+        aria-label="Reddit"
+        class="h-10 flex items-center justify-center hover:opacity-90 transition"
+        use:reveal={{ animation: "up", delay: 180 }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-auto cursor-pointer"
+          fill="#333"
+          viewBox="0 0 512 512"
+          ><path
+            d="M0 256C0 114.6 114.6 0 256 0S512 114.6 512 256s-114.6 256-256 256L37.1 512c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256zM349.6 153.6c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34c-34.5 3.7-61.4 33-61.4 68.4l0 .2c-37.5 1.6-71.8 12.3-99 29.1c-10.1-7.8-22.8-12.5-36.5-12.5c-33 0-59.8 26.8-59.8 59.8c0 24 14.1 44.6 34.4 54.1c2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54c0-33-26.8-59.8-59.8-59.8c-13.7 0-26.3 4.6-36.4 12.4c-27.4-17-62.1-27.7-100-29.1l0-.2c0-25.4 18.9-46.5 43.4-49.9l0 0c4.4 18.8 21.3 32.8 41.5 32.8zM177.1 246.9c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6s-31.4-8.8-30.4-30.5s15.4-38.3 32.1-38.3zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6c-1-21.7 11.8-39.3 28.5-39.3s31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9 .8-6.2 3.9-6.5c18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1 .3 5.1 3.6 3.9 6.5z"
+          ></path></svg
+        >
+      </a> -->
+
+      <a
+        href="https://www.producthunt.com/products/nook-browser"
         target="_blank"
         rel="noopener"
         aria-label="Product Hunt"
@@ -251,17 +306,71 @@
           />
         </svg>
       </a>
-    </div>
 
-    <!-- What's new link -->
-    <!-- <div class="mt-4" use:reveal={{ animation: "up", delay: 220, distance: 8 }}>
+      <!-- <a
+        href="https://buymeacoffee.com/nookbrowser"
+        target="_blank"
+        rel="noopener"
+        aria-label="Product Hunt"
+        class="h-10 flex items-center justify-center hover:opacity-90 transition"
+        use:reveal={{ animation: "up", delay: 240 }}
+      >
+        <svg
+          class="h-4 w-auto cursor-pointer"
+          version="1.1"
+          viewBox="0 0 884 1279"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#333"
+        >
+          <path
+            d="M791.109 297.518L790.231 297.002L788.201 296.383C789.018 297.072 790.04 297.472 791.109 297.518V297.518Z"
+          />
+          <path d="M803.896 388.891L802.916 389.166L803.896 388.891Z" />
+          <path
+            d="M791.484 297.377C791.359 297.361 791.237 297.332 791.118 297.29C791.111 297.371 791.111 297.453 791.118 297.534C791.252 297.516 791.379 297.462 791.484 297.377V297.377Z"
+          />
+          <path d="M791.113 297.529H791.244V297.447L791.113 297.529Z" />
+          <path
+            d="M803.111 388.726L804.591 387.883L805.142 387.573L805.641 387.04C804.702 387.444 803.846 388.016 803.111 388.726V388.726Z"
+          />
+          <path
+            d="M793.669 299.515L792.223 298.138L791.243 297.605C791.77 298.535 792.641 299.221 793.669 299.515V299.515Z"
+          />
+          <path
+            d="M430.019 1186.18C428.864 1186.68 427.852 1187.46 427.076 1188.45L427.988 1187.87C428.608 1187.3 429.485 1186.63 430.019 1186.18Z"
+          />
+          <path
+            d="M641.187 1144.63C641.187 1143.33 640.551 1143.57 640.705 1148.21C640.705 1147.84 640.86 1147.46 640.929 1147.1C641.015 1146.27 641.084 1145.46 641.187 1144.63Z"
+          />
+          <path />
+          <path
+            d="M281.304 1196.06C280.427 1195.3 279.354 1194.8 278.207 1194.61C279.136 1195.06 280.065 1195.51 280.684 1195.85L281.304 1196.06Z"
+          />
+          <path
+            d="M247.841 1164.01C247.704 1162.66 247.288 1161.35 246.619 1160.16C247.093 1161.39 247.489 1162.66 247.806 1163.94L247.841 1164.01Z"
+          />
+          <path
+            d="M472.623 590.836C426.682 610.503 374.546 632.802 306.976 632.802C278.71 632.746 250.58 628.868 223.353 621.274L270.086 1101.08C271.74 1121.13 280.876 1139.83 295.679 1153.46C310.482 1167.09 329.87 1174.65 349.992 1174.65C349.992 1174.65 416.254 1178.09 438.365 1178.09C462.161 1178.09 533.516 1174.65 533.516 1174.65C553.636 1174.65 573.019 1167.08 587.819 1153.45C602.619 1139.82 611.752 1121.13 613.406 1101.08L663.459 570.876C641.091 563.237 618.516 558.161 593.068 558.161C549.054 558.144 513.591 573.303 472.623 590.836Z"
+          />
+          <path
+            d="M78.6885 386.132L79.4799 386.872L79.9962 387.182C79.5987 386.787 79.1603 386.435 78.6885 386.132V386.132Z"
+          />
+          <path
+            d="M879.567 341.849L872.53 306.352C866.215 274.503 851.882 244.409 819.19 232.898C808.711 229.215 796.821 227.633 788.786 220.01C780.751 212.388 778.376 200.55 776.518 189.572C773.076 169.423 769.842 149.257 766.314 129.143C763.269 111.85 760.86 92.4243 752.928 76.56C742.604 55.2584 721.182 42.8009 699.88 34.559C688.965 30.4844 677.826 27.0375 666.517 24.2352C613.297 10.1947 557.342 5.03277 502.591 2.09047C436.875 -1.53577 370.983 -0.443234 305.422 5.35968C256.625 9.79894 205.229 15.1674 158.858 32.0469C141.91 38.224 124.445 45.6399 111.558 58.7341C95.7448 74.8221 90.5829 99.7026 102.128 119.765C110.336 134.012 124.239 144.078 138.985 150.737C158.192 159.317 178.251 165.846 198.829 170.215C256.126 182.879 315.471 187.851 374.007 189.968C438.887 192.586 503.87 190.464 568.44 183.618C584.408 181.863 600.347 179.758 616.257 177.304C634.995 174.43 647.022 149.928 641.499 132.859C634.891 112.453 617.134 104.538 597.055 107.618C594.095 108.082 591.153 108.512 588.193 108.942L586.06 109.252C579.257 110.113 572.455 110.915 565.653 111.661C551.601 113.175 537.515 114.414 523.394 115.378C491.768 117.58 460.057 118.595 428.363 118.647C397.219 118.647 366.058 117.769 334.983 115.722C320.805 114.793 306.661 113.611 292.552 112.177C286.134 111.506 279.733 110.801 273.333 110.009L267.241 109.235L265.917 109.046L259.602 108.134C246.697 106.189 233.792 103.953 221.025 101.251C219.737 100.965 218.584 100.249 217.758 99.2193C216.932 98.1901 216.482 96.9099 216.482 95.5903C216.482 94.2706 216.932 92.9904 217.758 91.9612C218.584 90.9319 219.737 90.2152 221.025 89.9293H221.266C232.33 87.5721 243.479 85.5589 254.663 83.8038C258.392 83.2188 262.131 82.6453 265.882 82.0832H265.985C272.988 81.6186 280.026 80.3625 286.994 79.5366C347.624 73.2302 408.614 71.0801 469.538 73.1014C499.115 73.9618 528.676 75.6996 558.116 78.6935C564.448 79.3474 570.746 80.0357 577.043 80.8099C579.452 81.1025 581.878 81.4465 584.305 81.7391L589.191 82.4445C603.438 84.5667 617.61 87.1419 631.708 90.1703C652.597 94.7128 679.422 96.1925 688.713 119.077C691.673 126.338 693.015 134.408 694.649 142.03L696.731 151.752C696.786 151.926 696.826 152.105 696.852 152.285C701.773 175.227 706.7 198.169 711.632 221.111C711.994 222.806 712.002 224.557 711.657 226.255C711.312 227.954 710.621 229.562 709.626 230.982C708.632 232.401 707.355 233.6 705.877 234.504C704.398 235.408 702.75 235.997 701.033 236.236H700.895L697.884 236.649L694.908 237.044C685.478 238.272 676.038 239.419 666.586 240.486C647.968 242.608 629.322 244.443 610.648 245.992C573.539 249.077 536.356 251.102 499.098 252.066C480.114 252.57 461.135 252.806 442.162 252.771C366.643 252.712 291.189 248.322 216.173 239.625C208.051 238.662 199.93 237.629 191.808 236.58C198.106 237.389 187.231 235.96 185.029 235.651C179.867 234.928 174.705 234.177 169.543 233.397C152.216 230.798 134.993 227.598 117.7 224.793C96.7944 221.352 76.8005 223.073 57.8906 233.397C42.3685 241.891 29.8055 254.916 21.8776 270.735C13.7217 287.597 11.2956 305.956 7.64786 324.075C4.00009 342.193 -1.67805 361.688 0.472751 380.288C5.10128 420.431 33.165 453.054 73.5313 460.35C111.506 467.232 149.687 472.807 187.971 477.556C338.361 495.975 490.294 498.178 641.155 484.129C653.44 482.982 665.708 481.732 677.959 480.378C681.786 479.958 685.658 480.398 689.292 481.668C692.926 482.938 696.23 485.005 698.962 487.717C701.694 490.429 703.784 493.718 705.08 497.342C706.377 500.967 706.846 504.836 706.453 508.665L702.633 545.797C694.936 620.828 687.239 695.854 679.542 770.874C671.513 849.657 663.431 928.434 655.298 1007.2C653.004 1029.39 650.71 1051.57 648.416 1073.74C646.213 1095.58 645.904 1118.1 641.757 1139.68C635.218 1173.61 612.248 1194.45 578.73 1202.07C548.022 1209.06 516.652 1212.73 485.161 1213.01C450.249 1213.2 415.355 1211.65 380.443 1211.84C343.173 1212.05 297.525 1208.61 268.756 1180.87C243.479 1156.51 239.986 1118.36 236.545 1085.37C231.957 1041.7 227.409 998.039 222.9 954.381L197.607 711.615L181.244 554.538C180.968 551.94 180.693 549.376 180.435 546.76C178.473 528.023 165.207 509.681 144.301 510.627C126.407 511.418 106.069 526.629 108.168 546.76L120.298 663.214L145.385 904.104C152.532 972.528 159.661 1040.96 166.773 1109.41C168.15 1122.52 169.44 1135.67 170.885 1148.78C178.749 1220.43 233.465 1259.04 301.224 1269.91C340.799 1276.28 381.337 1277.59 421.497 1278.24C472.979 1279.07 524.977 1281.05 575.615 1271.72C650.653 1257.95 706.952 1207.85 714.987 1130.13C717.282 1107.69 719.576 1085.25 721.87 1062.8C729.498 988.559 737.115 914.313 744.72 840.061L769.601 597.451L781.009 486.263C781.577 480.749 783.905 475.565 787.649 471.478C791.392 467.391 796.352 464.617 801.794 463.567C823.25 459.386 843.761 452.245 859.023 435.916C883.318 409.918 888.153 376.021 879.567 341.849ZM72.4301 365.835C72.757 365.68 72.1548 368.484 71.8967 369.792C71.8451 367.813 71.9483 366.058 72.4301 365.835ZM74.5121 381.94C74.6842 381.819 75.2003 382.508 75.7337 383.334C74.925 382.576 74.4089 382.009 74.4949 381.94H74.5121ZM76.5597 384.641C77.2996 385.897 77.6953 386.689 76.5597 384.641V384.641ZM80.672 387.979H80.7752C80.7752 388.1 80.9645 388.22 81.0333 388.341C80.9192 388.208 80.7925 388.087 80.6548 387.979H80.672ZM800.796 382.989C793.088 390.319 781.473 393.726 769.996 395.43C641.292 414.529 510.713 424.199 380.597 419.932C287.476 416.749 195.336 406.407 103.144 393.382C94.1102 392.109 84.3197 390.457 78.1082 383.798C66.4078 371.237 72.1548 345.944 75.2003 330.768C77.9878 316.865 83.3218 298.334 99.8572 296.355C125.667 293.327 155.64 304.218 181.175 308.09C211.917 312.781 242.774 316.538 273.745 319.36C405.925 331.405 540.325 329.529 671.92 311.91C695.905 308.686 719.805 304.941 743.619 300.674C764.835 296.871 788.356 289.731 801.175 311.703C809.967 326.673 811.137 346.701 809.778 363.615C809.359 370.984 806.139 377.915 800.779 382.989H800.796Z"
+          />
+        </svg>
+      </a>
+    </div> -->
+
+      <!-- What's new link -->
+      <!-- <div class="mt-4" use:reveal={{ animation: "up", delay: 220, distance: 8 }}>
       <a
         href={latest?.slug ? `/whats-new/${latest.slug}` : "/whats-new"}
         class="inline-flex items-center gap-2 text-sm text-[#07140f]/70 hover:text-[#07140f] transition-colors"
         aria-label="What's new in Nook"
       >
         <span
-          >What’s new in Nook{latest?.version
+          >What's new in Nook{latest?.version
             ? ` — ${latest.version}`
             : ""}</span
         >
@@ -285,6 +394,7 @@
       </a>
     </div>
     -->
+    </div>
   </section>
 
   <!-- Video Preview -->
@@ -304,7 +414,7 @@
           preload="none"
           poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'><rect width='100%25' height='100%25' fill='%23ffffff'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2307140f' font-family='Inter,system-ui' font-size='28'>Product preview</text></svg>"
           class="w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
-        />
+        ></video>
       </figure>
 
       <div
@@ -450,7 +560,7 @@
           </h3>
         </div>
         <p class="mt-2 text-sm text-[#07140f]/70">
-          Group work, hobbies, and rabbit-holes into calm “Rooms.” Switch with
+          Group work, hobbies, and rabbit-holes into calm "Rooms." Switch with
           one shortcut.
         </p>
       </li>
@@ -503,44 +613,63 @@
           class="w-full h-full object-cover"
           preload="none"
         ></video>
+        <div
+          class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
+                 bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
+        >
+          Spaces
+        </div>
       </figure>
       <div class="grid gap-6">
-        <figure
-          class="rounded-2xl border border-[#e2dec7] overflow-hidden bg-white/70 shadow-[0_32px_64px_-44px_rgba(7,20,15,.42)]"
-          use:reveal={{ animation: "up", delay: 100 }}
-        >
-          <video
-            src="https://zen-browser.app/media/split-views/video.webm"
-            autoplay
-            loop
-            muted
-            playsinline
-            class="w-full h-full object-cover"
-            preload="none"
-          ></video>
-        </figure>
-        <figure
-          class="rounded-2xl border border-[#e2dec7] overflow-hidden bg-white/70 shadow-[0_32px_64px_-44px_rgba(7,20,15,.42)]"
-          use:reveal={{ animation: "up", delay: 180 }}
-        >
-          <video
-            src="https://zen-browser.app/media/glance/video.webm"
-            autoplay
-            loop
-            muted
-            playsinline
-            class="w-full h-full object-cover"
-            preload="none"
-          ></video>
-        </figure>
+        <div class="relative">
+          <figure
+            class="rounded-2xl border border-[#e2dec7] overflow-hidden bg-white/70 shadow-[0_32px_64px_-44px_rgba(7,20,15,.42)]"
+            use:reveal={{ animation: "up", delay: 100 }}
+          >
+            <video
+              src="https://zen-browser.app/media/split-views/video.webm"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover"
+              preload="none"
+            ></video>
+          </figure>
+          <div
+            class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
+                 bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
+          >
+            Peek
+          </div>
+        </div>
+        <div class="relative">
+          <figure
+            class="rounded-2xl border border-[#e2dec7] overflow-hidden bg-white/70 shadow-[0_32px_64px_-44px_rgba(7,20,15,.42)]"
+            use:reveal={{ animation: "up", delay: 180 }}
+          >
+            <video
+              src="https://zen-browser.app/media/glance/video.webm"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover"
+              preload="none"
+            ></video>
+          </figure>
+          <div
+            class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
+                 bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
+          >
+            Split View
+          </div>
+        </div>
       </div>
     </div>
-    <p class="mt-4 text-center text-xs text-[#07140f]/55">
-      Yeah, another stolen video from Zen for placeholder purposes!
-    </p>
   </section>
 
-  <!-- TESTIMONIALS -->
+  <!-- TESTIMONIALS 
   <section class="max-w-5xl mx-auto px-6 mt-24">
     <div class="grid md:grid-cols-3 gap-4">
       <blockquote
@@ -576,7 +705,7 @@
         </footer>
       </blockquote>
     </div>
-  </section>
+  </section> -->
 
   <section class="max-w-5xl mx-auto px-6 mt-24">
     <div class="grid md:grid-cols-2 gap-6">
@@ -635,9 +764,9 @@
         class="rounded-3xl border border-[#0f2b1f]/12 bg-[#0f2b1f] text-[#f9f8f4] p-8 shadow-[0_32px_64px_-26px_rgba(7,20,15,.55)]"
         use:reveal={{ animation: "up", delay: 120 }}
       >
-        <h3 class="text-xl font-bold">What we’re shipping next</h3>
+        <h3 class="text-xl font-bold">What's new in Nook</h3>
         <p class="mt-2 text-[#f9f8f4]/70">
-          Fixing the issues and adding the features that are important to you.
+          Stay up to date with the latest changes to Nook Browser.
         </p>
         <ul class="mt-4 space-y-3 text-[15px]">
           <li class="flex items-start gap-3">
@@ -645,29 +774,65 @@
               class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
-            This is a placeholder
+            See our full changelog and release notes
           </li>
           <li class="flex items-start gap-3">
             <span
               class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
-            Something that is very important
+            Get updates on our latest features and improvements
           </li>
           <li class="flex items-start gap-3">
             <span
               class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
-            Our browser is going to be amazing
+            Join our community and get support from the developers
           </li>
         </ul>
         <div class="mt-6 flex flex-col sm:flex-row gap-3">
           <a
-            href="/roadmap"
+            href="/whats-new"
             class="cursor-pointer inline-flex items-center justify-center rounded-2xl bg-[#FDFDFC] text-[#07140f] px-6 py-3 font-medium shadow-[0_18px_30px_-18px_rgba(253,253,252,.45)] hover:-translate-y-0.5 transition-transform"
           >
-            See the full roadmap
+            See the latest updates
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEED HELP? -->
+  <section class="max-w-5xl mx-auto px-6 mt-20">
+    <div
+      class="rounded-3xl border border-[#e2dec7] bg-white/70 p-8 md:p-10 shadow-[0_28px_60px_-40px_rgba(7,20,15,.35)] backdrop-blur-sm"
+      use:reveal={{ animation: "up", delay: 0 }}
+    >
+      <div
+        class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+      >
+        <div>
+          <h3 class="text-[clamp(1.25rem,2.4vw,1.6rem)] font-semibold">
+            Need help?
+          </h3>
+          <p class="mt-1 text-[#07140f]/70">
+            Get answers fast and talk to us directly. We’re here for you.
+          </p>
+        </div>
+        <div class="flex w-full md:w-auto items-center gap-3">
+          <a
+            href="/support"
+            class="cursor-pointer inline-flex items-center justify-center rounded-2xl bg-[#0f2b1f] text-[#f9f8f4] px-6 py-3 text-sm font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition"
+          >
+            Open Support
+          </a>
+          <a
+            href="mailto:support@browsewithnook.com"
+            rel="noopener"
+            class="inline-flex items-center justify-center rounded-2xl border border-[#0f2b1f]/20 bg-white px-6 py-3 text-sm font-medium hover:bg-white/90"
+          >
+            Email us
           </a>
         </div>
       </div>
@@ -687,6 +852,9 @@
         </p>
       </div>
       <div class="flex items-center gap-5">
+        <a class="hover:text-[#07140f]" href="/team">Team</a>
+        <a class="hover:text-[#07140f]" href="/support">Support</a>
+        <a class="hover:text-[#07140f]" href="/whats-new">What's New</a>
         <a
           class="hover:text-[#07140f]"
           href="https://github.com/nook-browser"
@@ -695,13 +863,13 @@
         <a class="hover:text-[#07140f]" href="/roadmap">Roadmap</a>
         <a
           class="hover:text-[#07140f]"
-          href="https://discord.gg/TjSybMAa"
+          href="https://discord.gg/2gX69DuWwX"
           rel="noopener">Discord</a
         >
         <a
           class="hover:text-[#07140f]"
           href="https://x.com/browsewithnook"
-          rel="noopener">X (FKA Twitter)</a
+          rel="noopener">X</a
         >
         <a
           class="hover:text-[#07140f]"

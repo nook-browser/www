@@ -3,15 +3,22 @@
   import favicon from "$lib/assets/favicon.svg";
   import { dev } from "$app/environment";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
-
-  let { children } = $props();
+  const { data, children } = $props<{
+    data: {
+      latest?: { version?: string; slug?: string } | null;
+      stars?: number | null;
+    };
+  }>();
 
   const siteUrl = "https://browsewithnook.com";
   const siteName = "Nook Browser";
-  const defaultTitle = "Nook Browser — Keeping what we love, open";
-  const defaultDesc = "Open-source, Private, Yours forever.";
+  const defaultTitle = "Nook Browser — Open Sourcing Arc";
+  const defaultDesc =
+    "Open-source. Private by default. Better Arc without the noise.";
   const ogImage = `${siteUrl}/og-default.png`;
   const twitterHandle = "@browsewithnook";
+
+  let hideBanner = false;
 
   injectAnalytics({ mode: dev ? "development" : "production" });
 </script>
