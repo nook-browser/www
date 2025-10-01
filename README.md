@@ -29,5 +29,5 @@ PUBLIC_SANITY_DATASET=production
 
 ## Links
 
-- Site: ~~https://browsewithnook.com~~ (Future) https://nook-www-preview.vercel.app
+- Site: https://browsewithnook.com
 - Discord: https://discord.gg/2gX69DuWwX
