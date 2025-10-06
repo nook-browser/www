@@ -147,7 +147,7 @@
           }}
         >
           Browse. <br class="hidden sm:block" />
-          <span class="tracking-normal">It's yours</span>
+          <span class="tracking-normal">It's yours.</span>
         </h1>
 
         <p
