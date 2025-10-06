@@ -48,7 +48,7 @@
           Support
         </a>
         <a
-          href="https://buymeacoffee.com/nookbrowser"
+          href="https://opencollective.com/nook-browser"
           rel="noopener"
           class="inline-flex items-center justify-center rounded-2xl border border-[#0f2b1f]/20 bg-white px-7 py-3 font-medium hover:bg-white/90"
         >

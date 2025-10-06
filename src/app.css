@@ -21,6 +21,10 @@ video {
   font-family: "Urbanist", sans-serif;
 }
 
+.font-hero {
+  font-family: "Rethink Sans", sans-serif;
+}
+
 /* Accent gradient ink for headings */
 .gradient-ink {
   background: linear-gradient(180deg, #9cb57f 0%, #7da562 100%);

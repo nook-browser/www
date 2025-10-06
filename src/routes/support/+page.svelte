@@ -1,9 +1,9 @@
 <script>
-  let dismissed = $state(false);
+  let dismissed = $state(true);
 
-  function dismissSupportBanner() {
+  /* function dismissSupportBanner() {
     dismissed = true;
-  }
+  } */
 </script>
 
 <svelte:head>
@@ -46,7 +46,6 @@
       <button
         class="ml-1 text-[#07140f]/60 hover:text-[#07140f] cursor-pointer"
         aria-label="Dismiss support banner"
-        on:click={dismissSupportBanner}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -66,20 +65,52 @@
 {/if}
 
 <div style="margin:0;height:100vh;overflow:hidden;">
-  <a
-    class="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/30 cursor-pointer"
-    href="/"
+  <div
+    class="fixed top-4 right-4 z-10 p-2 flex items-center justify-center z-50 gap-2"
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 256 256"
-      fill="white"
-      class="w-4 h-4 opacity-60"
-      ><path
-        d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"
-      /></svg
+    <div
+      class="inline-flex items-center gap-2 rounded-full border border-[#0f2b1f]/15 bg-white/80 px-4 py-2 backdrop-blur shadow-[0_10px_24px_-18px_rgba(7,20,15,.25)] hover:bg-white transition-colors duration-200 ease-in-out"
     >
-  </a>
+      <a
+        href="mailto:support@browsewithnook.com"
+        class="inline-flex items-center gap-1 text-sm text-[#07140f]/85 hover:text-[#07140f]"
+      >
+        <span class="font-medium">Email us</span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M7 17L17 7M9 7H17V15"
+            stroke="#07140f"
+            stroke-opacity="0.7"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <a
+      class="inline-flex items-center rounded-full border border-[#0f2b1f]/15 bg-white/80 p-2.5 backdrop-blur shadow-[0_10px_24px_-18px_rgba(7,20,15,.25)] hover:bg-white transition-colors duration-200 ease-in-out"
+      href="/"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 256"
+        fill="black"
+        class="w-4 h-4 opacity-60"
+        ><path
+          d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"
+        /></svg
+      >
+    </a>
+  </div>
 
   <iframe
     data-tally-src="https://tally.so/r/3lQXJ6"

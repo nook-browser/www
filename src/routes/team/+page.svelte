@@ -78,14 +78,12 @@
   </header>
 
   <!-- HERO -->
-  <section class="max-w-6xl mx-auto px-6 pt-20 md:pt-28">
+  <section class="max-w-6xl mx-auto px-6 pt-24 md:pt-32">
     <h1
-      class="text-[clamp(2.1rem,5.6vw,3.6rem)] leading-[1.06] tracking-tight"
+      class="text-[clamp(2.1rem,5.6vw,3.6rem)] leading-[1.06] tracking-tight font-hero"
       use:reveal={{ animation: "up" }}
     >
-      Meet our <span class="gradient-ink instrument-serif-regular-italic"
-        >team</span
-      >.
+      Meet our <span class="gradient-ink">team</span>.
     </h1>
     <p
       class="mt-3 text-[clamp(0.95rem,2.1vw,1.15rem)] text-[#07140f]/70"
@@ -104,7 +102,7 @@
       >
         {#each team as m, i}
           <li
-            class="group rounded-2xl border border-[#e2dec7] bg-white/70 p-4 shadow-[0_18px_36px_-30px_rgba(7,20,15,.35)] transition will-change-transform"
+            class="group rounded-2xl border border-[#e2dec7] bg-white/70 p-4 shadow-[0_18px_36px_-30px_rgba(7,20,15,.35)] transition will-change-transform hover:-translate-y-0.5"
             use:reveal={{ animation: "up", delay: 24 * i }}
           >
             <a href={m.html_url} target="_blank" rel="noopener" class="block">
@@ -165,7 +163,7 @@
         class="flex items-center justify-between"
         use:reveal={{ animation: "up" }}
       >
-        <h2 class="text-lg font-semibold">Contributors</h2>
+        <h2 class="text-lg font-semibold font-hero">Contributors</h2>
         <a
           href="https://github.com/nook-browser"
           rel="noopener"
@@ -178,7 +176,7 @@
       >
         {#each contributors as m, i}
           <li
-            class="group rounded-xl border border-[#e2dec7] bg-white/70 p-3 transition will-change-transform"
+            class="group rounded-xl border border-[#e2dec7] bg-white/70 p-3 transition will-change-transform hover:-translate-y-0.5"
             use:reveal={{ animation: "up", delay: 16 * i }}
           >
             <a

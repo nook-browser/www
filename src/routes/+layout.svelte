@@ -12,7 +12,7 @@
 
   const siteUrl = "https://browsewithnook.com";
   const siteName = "Nook Browser";
-  const defaultTitle = "Nook Browser — Open Sourcing Arc";
+  const defaultTitle = "Nook Browser";
   const defaultDesc =
     "Open-source. Private by default. Better Arc without the noise.";
   const ogImage = `${siteUrl}/og-default.png`;
@@ -42,6 +42,11 @@
   />
   <link
     href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
     rel="stylesheet"
   />
 
