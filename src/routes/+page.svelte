@@ -414,7 +414,7 @@
             loop
             muted
             playsinline
-            preload="none"
+            preload="metadata"
             poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'><rect width='100%25' height='100%25' fill='%23ffffff'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2307140f' font-family='Inter,system-ui' font-size='28'>Product preview</text></svg>"
             class="w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
           ></video>
@@ -590,7 +590,7 @@
           muted
           playsinline
           class="w-full h-full object-cover"
-          preload="none"
+          preload="metadata"
         ></video>
         <div
           class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
@@ -612,7 +612,7 @@
               muted
               playsinline
               class="w-full h-full object-cover"
-              preload="none"
+              preload="metadata"
             ></video>
           </figure>
           <div
@@ -634,7 +634,7 @@
               muted
               playsinline
               class="w-full h-full object-cover"
-              preload="none"
+              preload="metadata"
             ></video>
           </figure>
           <div

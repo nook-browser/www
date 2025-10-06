@@ -1,7 +1,7 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   const {
-    showDownload = true,
+    showDownload = false,
     showWaitlist = true,
     className = "",
   } = $props<{
