@@ -1,8 +1,8 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   const {
-    showDownload = false,
-    showWaitlist = true,
+    showDownload = true,
+    showWaitlist = false,
     className = "",
   } = $props<{
     showDownload?: boolean;
@@ -18,14 +18,6 @@
       <span class="font-semibold text-xl logo-font">nook browser</span>
     </a>
     <div class="flex items-center gap-2">
-      {#if showDownload}
-        <a
-          href="/download"
-          class="hidden rounded-full border border-[#0f2b1f]/15 bg-white/70 px-5 py-2.5 text-sm font-medium shadow-[0_8px_18px_-14px_rgba(7,20,15,.25)] hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9cb57f] md:inline-flex items-center justify-center gap-1.5"
-        >
-          Download
-        </a>
-      {/if}
       <a
         href="https://github.com/nook-browser"
         rel="noopener"
@@ -54,6 +46,14 @@
         >
           Join waitlist
         </button>
+      {/if}
+      {#if showDownload}
+        <a
+          href="/download"
+          class="inline-flex items-center justify-center rounded-full bg-[#0f2b1f] px-5 py-2.5 text-sm font-semibold text-[#f9f8f4] shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] transition"
+        >
+          Download alpha
+        </a>
       {/if}
     </div>
   </nav>

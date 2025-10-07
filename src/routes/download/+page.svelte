@@ -63,7 +63,7 @@
       class="mt-8 text-[clamp(2.2rem,6vw,3.8rem)] leading-[1.06] tracking-tight font-hero"
       use:reveal={{ animation: "up", duration: 650, distance: 10 }}
     >
-      Download <span class="gradient-ink">Nook for macOS.</span>
+      Download <span class="gradient-ink">Nook Alpha</span>
     </h1>
     <p
       class="mt-3 text-[clamp(1rem,2.1vw,1.15rem)] text-[#07140f]/75 max-w-2xl mx-auto"

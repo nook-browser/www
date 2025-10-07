@@ -32,7 +32,7 @@
   <title>Nook Browser - Open Sourcing Arc</title>
   <meta
     name="description"
-    content="Join the Nook Browser Waitlist. A minimal, cozy, open-source browser you can shape."
+    content="Download the Nook Browser alpha. A minimal, cozy, open-source browser you can shape."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
@@ -118,16 +118,14 @@
           </svg>
           GitHub
         </a>
-        <button
-          data-tally-open="n0XQp9"
-          data-tally-width="520"
-          data-tally-overlay="1"
+        <a
+          href="/download"
           class="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0f2b1f]
                    px-5 py-2.5 text-sm font-semibold text-[#f9f8f4]
                    shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9cb57f]"
         >
-          Join waitlist
-        </button>
+          Download alpha
+        </a>
       </div>
     </nav>
   </header>
@@ -160,15 +158,13 @@
         <div
           class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3"
         >
-          <button
-            data-tally-open="n0XQp9"
-            data-tally-width="500"
-            data-tally-overlay="1"
+          <a
+            href="/download"
             class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)]"
             use:reveal={{ animation: "up", delay: 120, distance: 10 }}
           >
-            Join waitlist
-          </button>
+            Download alpha
+          </a>
           <a
             href="https://opencollective.com/nook-browser"
             class="inline-flex items-center justify-center rounded-3xl border border-[#0f2b1f]/25 bg-white/70 px-8 py-4 font-medium hover:bg-white shadow-[0_10px_24px_-18px_rgba(7,20,15,.25)] transition-colors"
@@ -692,9 +688,9 @@
         class="rounded-3xl border border-[#e2dec7] bg-white/70 p-8 shadow-[0_32px_64px_-44px_rgba(7,20,15,.42)]"
         use:reveal={{ animation: "up", delay: 0 }}
       >
-        <h3 class="text-xl font-bold">Join the waitlist</h3>
+        <h3 class="text-xl font-bold">Download the alpha</h3>
         <p class="mt-2 text-[#07140f]/70">
-          Early access, feedback sessions, and a say in what ships next.
+          Install Nook for macOS and start browsing in seconds.
         </p>
         <ul class="mt-5 space-y-3 text-[15px]">
           <li class="flex items-start gap-3">
@@ -702,36 +698,35 @@
               class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
-            A modern, minimal browser built for you
+            Minimal, modern UI
           </li>
           <li class="flex items-start gap-3">
             <span
               class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
-            Local-first data, data never leaves your device
+            Local-first & private by default
           </li>
           <li class="flex items-start gap-3">
             <span
               class="mt-1 inline-flex h-5 w-5 min-h-5 min-w-5 items-center justify-center rounded-full bg-[#9cb57f] text-[#07140f] text-[11px] font-bold"
               >✓</span
             >
-            Community roadmap & extensions support
+            Open roadmap & extensions in the works
           </li>
         </ul>
 
         <div class="mt-6 flex flex-col sm:flex-row gap-3">
-          <button
-            data-tally-open="n0XQp9"
-            data-tally-width="500"
-            data-tally-overlay="1"
+          <a
+            href="/download"
             class="cursor-pointer inline-flex items-center justify-center rounded-2xl bg-[#0f2b1f] text-[#f9f8f4] px-6 py-3 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform"
           >
-            Get on the list
-          </button>
+            Download alpha
+          </a>
           <a
-            href="https://github.com/nook-browser"
+            href="https://github.com/nook-browser/Nook"
             rel="noopener"
+            target="_blank"
             class="cursor-pointer inline-flex items-center justify-center rounded-2xl border border-[#0f2b1f]/20 bg-white px-6 py-3 font-medium hover:bg-white/90"
           >
             View on GitHub
