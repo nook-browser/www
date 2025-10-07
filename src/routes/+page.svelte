@@ -720,14 +720,15 @@ function dismissVersionBanner() {
             Open roadmap & extensions in the works
           </li>
         </ul>
-
         <div class="mt-6 flex flex-col sm:flex-row gap-3">
-          <a
-            href="/download"
-            class="cursor-pointer inline-flex items-center justify-center rounded-2xl bg-[#0f2b1f] text-[#f9f8f4] px-6 py-3 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform"
-          >
-            Download alpha
-          </a>
+        {#if SHOW_DOWNLOAD}
+            <a
+                href="/download"
+                class="cursor-pointer inline-flex items-center justify-center rounded-2xl bg-[#0f2b1f] text-[#f9f8f4] px-6 py-3 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform"
+            >
+                Download alpha
+            </a>
+        {/if}
           <a
             href="https://github.com/nook-browser/Nook"
             rel="noopener"
