@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Logo from "$lib/components/Logo.svelte";
-  const {
-    showDownload = true,
-    showWaitlist = false,
-    className = "",
-  } = $props<{
-    showDownload?: boolean;
-    showWaitlist?: boolean;
-    className?: string;
-  }>();
+import Logo from "$lib/components/Logo.svelte";
+const {
+	showDownload = false,
+	showWaitlist = false,
+	className = "",
+} = $props<{
+	showDownload?: boolean;
+	showWaitlist?: boolean;
+	className?: string;
+}>();
 </script>
 
 <header class={`max-w-6xl mx-auto px-6 pt-8 ${className}`}>
