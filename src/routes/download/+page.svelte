@@ -87,7 +87,7 @@
             >Alpha</span
           >
           <span aria-hidden="true">•</span>
-          <span>macOS 13+</span>
+          <span>macOS 15.5+</span>
           <span aria-hidden="true">•</span>
           <span
             >Latest: {data.release.name} — {dateLabel(
