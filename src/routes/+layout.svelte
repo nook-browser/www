@@ -15,6 +15,8 @@
   const defaultTitle = "Nook Browser";
   const defaultDesc =
     "Open-source. Private by default. Better Arc without the noise.";
+  const ogImage = `${siteUrl}/og-default.png`;
+
   const twitterHandle = "@browsewithnook";
 
   let hideBanner = false;
