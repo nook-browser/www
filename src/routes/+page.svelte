@@ -10,7 +10,7 @@ export let data: {
 
 const latest = data?.latest;
 let showVersionBanner = false;
-const SHOW_DOWNLOAD = false;
+const SHOW_DOWNLOAD = true;
 
 onMount(() => {
 	if (!latest?.version) return;
