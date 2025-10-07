@@ -1,1 +1,10 @@
 .DS_Store
+node_modules
+dist
+package-lock.json
+.env
+.svelte-kit
+.cloudflare
+.pnpm-debug.log
+.vercel
+.idea/

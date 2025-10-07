@@ -1,31 +1,32 @@
 <script lang="ts">
-  import Logo from "$lib/components/Logo.svelte";
-  import { reveal } from "$lib/actions/reveal";
-  import Footer from "$lib/components/Footer.svelte";
-  import { onMount } from "svelte";
-  export let data: {
-    latest?: { version?: string; slug?: string } | null;
-    stars?: number | null;
-  };
+import Logo from "$lib/components/Logo.svelte";
+import { reveal } from "$lib/actions/reveal";
+import Footer from "$lib/components/Footer.svelte";
+import { onMount } from "svelte";
+export let data: {
+	latest?: { version?: string; slug?: string } | null;
+	stars?: number | null;
+};
 
-  const latest = data?.latest;
-  let showVersionBanner = false;
+const latest = data?.latest;
+let showVersionBanner = false;
+const SHOW_DOWNLOAD = false;
 
-  onMount(() => {
-    if (!latest?.version) return;
-    const key = "nook_whatsnew_dismissed_version";
-    const dismissed =
-      typeof localStorage !== "undefined" ? localStorage.getItem(key) : null;
-    showVersionBanner = dismissed !== latest.version;
-  });
+onMount(() => {
+	if (!latest?.version) return;
+	const key = "nook_whatsnew_dismissed_version";
+	const dismissed =
+		typeof localStorage !== "undefined" ? localStorage.getItem(key) : null;
+	showVersionBanner = dismissed !== latest.version;
+});
 
-  function dismissVersionBanner() {
-    const key = "nook_whatsnew_dismissed_version";
-    if (latest?.version && typeof localStorage !== "undefined") {
-      localStorage.setItem(key, latest.version);
-    }
-    showVersionBanner = false;
-  }
+function dismissVersionBanner() {
+	const key = "nook_whatsnew_dismissed_version";
+	if (latest?.version && typeof localStorage !== "undefined") {
+		localStorage.setItem(key, latest.version);
+	}
+	showVersionBanner = false;
+}
 </script>
 
 <svelte:head>
@@ -118,14 +119,16 @@
           </svg>
           GitHub
         </a>
-        <a
-          href="/download"
-          class="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0f2b1f]
-                   px-5 py-2.5 text-sm font-semibold text-[#f9f8f4]
-                   shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9cb57f]"
-        >
-          Download alpha
-        </a>
+        {#if SHOW_DOWNLOAD}
+            <a
+              href="/download"
+              class="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0f2b1f]
+                       px-5 py-2.5 text-sm font-semibold text-[#f9f8f4]
+                       shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)] hover:-translate-y-0.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9cb57f]"
+            >
+              Download alpha
+            </a>
+        {/if}
       </div>
     </nav>
   </header>
@@ -158,13 +161,15 @@
         <div
           class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3"
         >
-          <a
-            href="/download"
-            class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)]"
-            use:reveal={{ animation: "up", delay: 120, distance: 10 }}
-          >
-            Download alpha
-          </a>
+            {#if SHOW_DOWNLOAD}
+                <a
+                  href="/download"
+                  class="cursor-pointer inline-flex items-center justify-center rounded-3xl bg-[#0f2b1f] text-[#f9f8f4] px-8 py-4 font-medium shadow-[0_18px_30px_-18px_rgba(7,20,15,.45)]"
+                  use:reveal={{ animation: "up", delay: 120, distance: 10 }}
+                >
+                  Download alpha
+                </a>
+            {/if}
           <a
             href="https://opencollective.com/nook-browser"
             class="inline-flex items-center justify-center rounded-3xl border border-[#0f2b1f]/25 bg-white/70 px-8 py-4 font-medium hover:bg-white shadow-[0_10px_24px_-18px_rgba(7,20,15,.25)] transition-colors"
@@ -644,7 +649,7 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS 
+  <!-- TESTIMONIALS
   <section class="max-w-5xl mx-auto px-6 mt-24">
     <div class="grid md:grid-cols-3 gap-4">
       <blockquote
