@@ -15,5 +15,6 @@
 			"custom_domain": true
 		}
 	],
+	"compatibility_flags": ["nodejs_compat"],
 	"compatibility_date": "2025-01-01"
 }
