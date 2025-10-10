@@ -35,6 +35,7 @@ export const load: PageServerLoad = async ({ fetch, request }) => {
 
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
+    "User-Agent": "nook-browser-team",
   };
   if (token) headers.Authorization = `Bearer ${token}`;
 
