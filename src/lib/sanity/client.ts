@@ -44,7 +44,7 @@ export async function sanityQuery<T>(
   const url = buildSanityUrl(query, params);
   const headers: Record<string, string> = { Accept: "application/json" };
   if (token) headers.Authorization = `Bearer ${token}`;
-  const res = await (fetcher ?? fetch)(url, { headers });
+  const res = await (fetch)(url, { headers });
   if (!res.ok) {
     throw new Error(`Sanity query failed: ${res.status}`);
   }
