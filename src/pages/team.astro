@@ -1,0 +1,222 @@
+---
+import Logo from "../components/Logo.svelte";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import { CORE_TEAM, type CoreMember } from "../data/team";
+import Header from "../components/Header.astro";
+
+export const prerender = false;
+
+const org = "nook-browser";
+const repo = "nook";
+
+async function fetchJSON<T>(url: string): Promise<T> {
+  const res = await fetch(url, {
+    headers: { Accept: "application/vnd.github+json" },
+  });
+  if (!res.ok) throw new Error(`Failed ${url}: ${res.status}`);
+  return (await res.json()) as T;
+}
+
+type GHUser = {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+  name?: string;
+};
+type GHContributor = {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+  contributions: number;
+};
+
+// Map core team to enriched cards using GH profile where available
+const memberLogins = new Set(
+  CORE_TEAM.filter((m) => m.login).map((m) => m.login as string)
+);
+const [ghMembers, contributors] = await Promise.all([
+  fetchJSON<GHUser[]>(`https://api.github.com/orgs/${org}/members`),
+  fetchJSON<GHContributor[]>(
+    `https://api.github.com/repos/${org}/${repo}/contributors?per_page=100`
+  ),
+]).catch(() => [[], []] as [GHUser[], GHContributor[]]);
+
+const loginToGH = new Map(ghMembers.map((m) => [m.login, m] as const));
+const members = CORE_TEAM.map((m) => {
+  const gh = m.login ? loginToGH.get(m.login) : undefined;
+  return {
+    ...m,
+    avatar_url:
+      m.customPfp ??
+      gh?.avatar_url ??
+      (m.login ? `https://github.com/${m.login}.png` : "/favicon.png"),
+    html_url:
+      m.url ??
+      gh?.html_url ??
+      (m.login ? `https://github.com/${m.login}` : "#"),
+  } as CoreMember & { avatar_url: string; html_url: string };
+});
+
+// Build refined contributors list (API-based), filter bots/apps and dedupe
+const botRegex = /(bot|apps?)$/i;
+const contributorMap = new Map<string, GHContributor>();
+for (const c of contributors) {
+  if (botRegex.test(c.login)) continue;
+  if (!contributorMap.has(c.login)) contributorMap.set(c.login, c);
+}
+const refinedContributors = Array.from(contributorMap.values());
+---
+
+<html
+  lang="en"
+  class="h-full bg-fixed bg-[length:100%_100%] bg-[linear-gradient(135deg,_#F1EFDF,_#F9F8F4)]"
+>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Team — Nook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen w-full text-[#1b1b18] antialiased">
+    <Header />
+
+    <section
+      class="max-w-3xl mx-auto px-6 pt-20 md:pt-28 pb-10 text-center"
+      data-reveal-parent
+    >
+      <h1
+        data-reveal
+        class="font-medium tracking-tight leading-[1.1] text-[clamp(1.8rem,4.8vw,2.75rem)] [font-family:var(--font-rethink)] text-[#373230]"
+      >
+        Team
+      </h1>
+      <p
+        class="mt-3 text-[15px] md:text-[16px] text-[#07140f]/70"
+        data-reveal
+        data-reveal-delay="90"
+      >
+        People behind Nook and our amazing contributors.
+      </p>
+    </section>
+
+    <section
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-8"
+      data-reveal-parent
+    >
+      <h2 class="text-sm font-semibold tracking-wide text-[#07140f]/70">
+        Core team
+      </h2>
+      <ul
+        data-reveal
+        class="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+      >
+        {
+          members.map((m) => (
+            <li class="group rounded-2xl p-2 transition will-change-transform hover:-translate-y-0.5">
+              <a
+                href={m.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block"
+              >
+                <div class="w-full aspect-square">
+                  <img
+                    src={m.avatar_url as string}
+                    alt={m.name ?? m.login ?? ""}
+                    class="w-full h-full object-cover rounded-xl"
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                    onerror={`this.src='${m.login ? `https://github.com/${m.login}.png` : "/favicon.png"}';this.onerror=null;`}
+                  />
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                  <div class="min-w-0">
+                    <p class="text-[15px] font-medium truncate text-[#373230]">
+                      {m.name ?? m.login}
+                    </p>
+                    <p class="text-xs text-[#6b6b62] truncate">
+                      {m.role ?? (m.login ? `@${m.login}` : "")}
+                    </p>
+                    {m.email && (
+                      <span class="block text-xs text-[#6b6b62] truncate mt-2">
+                        {m.email}
+                      </span>
+                    )}
+                  </div>
+                  <svg
+                    class="h-4 w-4 text-[#6b6b62] group-hover:text-[#373230] transition"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7 17L17 7M9 7H17V15"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-16"
+      data-reveal-parent
+    >
+      <h2 class="text-sm font-semibold tracking-wide text-[#07140f]/70">
+        Contributors
+      </h2>
+      <ul
+        data-reveal
+        class="mt-3 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2"
+      >
+        {
+          refinedContributors.map((c) => (
+            <li class="rounded-xl border border-black/10 bg-white/60 backdrop-blur-md p-2 text-center transition hover:bg-white/70 hover:-translate-y-[1px]">
+              <a
+                href={c.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex flex-col items-center gap-2"
+              >
+                <img
+                  src={`${c.avatar_url || `https://github.com/${c.login}.png`}`}
+                  alt={c.login}
+                  class="h-10 w-10 rounded-full border border-black/10 object-cover bg-[#f1efdf]"
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                  decoding="async"
+                  referrerpolicy="no-referrer"
+                  onerror={`this.src='https://github.com/${c.login}.png';this.onerror=null;`}
+                />
+                <div class="text-[11px] font-medium text-[#07140f] line-clamp-1">
+                  {c.login}
+                </div>
+                <div class="text-[10px] text-[#6b6b62]">
+                  {c.contributions} commits
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Footer />
+  </body>
+</html>

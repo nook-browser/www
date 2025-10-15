@@ -1,0 +1,224 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+type GHMilestone = {
+  id: number;
+  number: number;
+  title: string;
+  description?: string;
+  open_issues: number;
+  closed_issues: number;
+  state: "open" | "closed";
+  due_on?: string;
+  html_url: string;
+};
+
+type GHIssue = {
+  id: number;
+  number: number;
+  title: string;
+  html_url: string;
+  labels?: { name?: string }[];
+};
+
+const org = "nook-browser";
+const repo = "nook";
+
+async function fetchJSON<T>(url: string): Promise<T> {
+  const res = await fetch(url, {
+    headers: { Accept: "application/vnd.github+json" },
+  });
+  if (!res.ok) throw new Error(`Failed ${url}: ${res.status}`);
+  return (await res.json()) as T;
+}
+
+let milestones: GHMilestone[] = [];
+let backlog: GHIssue[] = [];
+try {
+  milestones = await fetchJSON<GHMilestone[]>(
+    `https://api.github.com/repos/${org}/${repo}/milestones?state=open&sort=due_on&direction=asc`
+  );
+} catch {}
+
+try {
+  backlog = await fetchJSON<GHIssue[]>(
+    `https://api.github.com/repos/${org}/${repo}/issues?state=open&labels=enhancement&per_page=50`
+  );
+} catch {}
+
+function percent(closed: number, total: number): number {
+  const t = Math.max(0, closed + total);
+  if (!t) return 0;
+  const p = Math.round((closed / t) * 100);
+  return Number.isFinite(p) ? p : 0;
+}
+---
+
+<html
+  lang="en"
+  class="h-full bg-fixed bg-[length:100%_100%] bg-[linear-gradient(135deg,_#F1EFDF,_#F9F8F4)]"
+>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Roadmap — Nook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen w-full text-[#1b1b18] antialiased">
+    <Header />
+
+    <section
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] text-center pt-[clamp(36px,16vw,100px)] pb-0"
+      data-reveal-parent
+    >
+      <h1
+        class="font-medium tracking-tight leading-[1.1] text-3xl sm:text-5xl md:text-6xl [font-family:var(--font-rethink)] text-[#373230]"
+        data-reveal
+      >
+        Roadmap
+      </h1>
+      <p class="mt-3 text-[#6b6b62] text-sm" data-reveal data-reveal-delay="90">
+        What's in flight and what's next for Nook.
+      </p>
+    </section>
+
+    <section
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] py-[clamp(24px,8vw,56px)]"
+      data-reveal-parent
+    >
+      <div class="flex items-center justify-between" data-reveal>
+        <h2 class="text-sm font-semibold tracking-wide text-[#07140f]/70">
+          Focus
+        </h2>
+        <a
+          href={`https://github.com/${org}/${repo}/milestones`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-[#6b6b62] hover:text-[#171717]">View all</a
+        >
+      </div>
+      <div class="mt-3 space-y-3">
+        {
+          milestones.length === 0 && (
+            <div
+              class="rounded-2xl border border-black/10 bg-white/60 backdrop-blur-md p-6 text-[#6b6b62]"
+              data-reveal
+            >
+              No active milestones right now.
+            </div>
+          )
+        }
+        {
+          milestones.map((m, i) => (
+            <div
+              class="rounded-2xl border border-black/10 bg-white/60 backdrop-blur-md p-6"
+              data-reveal
+              data-reveal-delay={String(i * 70)}
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <a
+                    href={m.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-[#373230] font-semibold hover:opacity-80 line-clamp-2"
+                  >
+                    {m.title}
+                  </a>
+                  {m.description && (
+                    <p class="mt-1.5 text-sm text-[#6b6b62] line-clamp-2">
+                      {m.description}
+                    </p>
+                  )}
+                </div>
+                {m.due_on && (
+                  <span class="shrink-0 rounded-full bg-[#efe9d0] text-[#07140f] border border-[#e2dec7] px-2 py-0.5 text-[11px] font-semibold">
+                    due {new Date(m.due_on).toLocaleDateString()}
+                  </span>
+                )}
+              </div>
+              <div class="mt-4">
+                <div class="h-2 rounded-full bg-[#efe9d0] overflow-hidden border border-[#e2dec7]/70">
+                  <div
+                    class="h-full bg-[#171717]"
+                    style={`width:${percent(m.closed_issues, m.open_issues)}%`}
+                  />
+                </div>
+                <div class="mt-1.5 text-xs text-[#6b6b62]">
+                  {m.closed_issues} closed • {m.open_issues} open
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-[clamp(42px,10vw,96px)]"
+      data-reveal-parent
+    >
+      <div class="flex items-center justify-between" data-reveal>
+        <h2 class="text-sm font-semibold tracking-wide text-[#07140f]/70">
+          Ideas & backlog
+        </h2>
+        <div class="flex items-center gap-2">
+          <a
+            href={`https://github.com/${org}/${repo}/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs text-[#6b6b62] hover:text-[#171717]">View all</a
+          >
+          <a
+            href={`https://github.com/${org}/${repo}/issues/new/choose`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/10 bg-white/70 text-xs text-[#171717] hover:bg-white/80"
+            >Suggest</a
+          >
+        </div>
+      </div>
+      <ul class="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {
+          backlog.slice(0, 15).map((it, i) => (
+            <li
+              class="rounded-xl border border-black/10 bg-white/60 backdrop-blur-md p-4 text-left"
+              data-reveal
+              data-reveal-delay={String(i * 40)}
+            >
+              <a
+                href={it.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block hover:opacity-80"
+              >
+                <div class="text-sm font-medium text-[#07140f] line-clamp-2">
+                  {it.title}
+                </div>
+                {Array.isArray(it.labels) && it.labels.length > 0 && (
+                  <div class="mt-2 flex flex-wrap gap-1.5">
+                    {it.labels.slice(0, 2).map((l) => (
+                      <span class="inline-flex items-center rounded-full bg-[#efe9d0] text-[#07140f] border border-[#e2dec7] px-2 py-0.5 text-[10px] font-semibold">
+                        {l?.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,189 @@
+---
+import "../styles/global.css";
+
+const year = new Date().getFullYear();
+
+const excludeMt16 = ["download"];
+---
+
+<footer
+  class={`border-t border-black/10 ${excludeMt16.includes(Astro.url.pathname) ? "mt-16" : ""}`}
+>
+  <div
+    class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] py-10 text-sm"
+  >
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-[#6b6b62]"
+    >
+      <div>
+        <div class="text-[#373230] font-semibold text-base">Nook Browser</div>
+        <p class="mt-2 leading-relaxed">
+          Open-source • local-first • cozy by design
+        </p>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-wide text-[#373230]/80">
+          PRODUCT
+        </div>
+        <ul class="mt-3 space-y-2">
+          <li><a class="hover:opacity-80" href="/whats-new">What's New</a></li>
+          <li><a class="hover:opacity-80" href="/roadmap">Roadmap</a></li>
+          <li>
+            <a
+              class="hover:opacity-80"
+              href="https://opencollective.com/dashboard/nook-browser"
+              target="_blank"
+              rel="noopener noreferrer">Support</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-wide text-[#373230]/80">
+          PROJECT
+        </div>
+        <ul class="mt-3 space-y-2">
+          <li><a class="hover:opacity-80" href="/team">Team</a></li>
+          <li>
+            <a
+              class="hover:opacity-80"
+              href="https://github.com/nook-browser/nook"
+              target="_blank"
+              rel="noopener noreferrer">GitHub</a
+            >
+          </li>
+          <li>
+            <a
+              class="hover:opacity-80"
+              href="https://opencollective.com/nook-browser"
+              target="_blank"
+              rel="noopener noreferrer">Fund</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-wide text-[#373230]/80">
+          COMMUNITY
+        </div>
+        <ul class="mt-3 space-y-2">
+          <li>
+            <a
+              class="hover:opacity-80"
+              href="https://discord.gg/2gX69DuWwX"
+              target="_blank"
+              rel="noopener noreferrer">Discord</a
+            >
+          </li>
+          <li>
+            <a
+              class="hover:opacity-80"
+              href="https://x.com/browsewithnook"
+              target="_blank"
+              rel="noopener noreferrer">X (FKA Twitter)</a
+            >
+          </li>
+          <li>
+            <a
+              class="hover:opacity-80"
+              href="https://instagram.com/browsewithnook"
+              target="_blank"
+              rel="noopener noreferrer">Instagram</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-8 pt-6 border-top border-black/10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+    >
+      <div class="text-[#6b6b62]">© {year} Nook Browser</div>
+      <!-- <div class="flex flex-wrap gap-2">
+        <a
+          class="px-3 py-1.5 rounded-full border border-black/10 bg-white/70 backdrop-blur-md hover:bg-white/80 transition"
+          href="/">Learn more</a
+        >
+        <a
+          class="px-3 py-1.5 rounded-full border border-black/10 bg-white/70 backdrop-blur-md hover:bg-white/80 transition"
+          href="https://github.com/nook-browser/nook/issues/new/choose"
+          target="_blank"
+          rel="noopener noreferrer">Report a bug</a
+        >
+        <a
+          class="px-3 py-1.5 rounded-full border border-black/10 bg-white/70 backdrop-blur-md hover:bg-white/80 transition"
+          href="mailto:support@nookbrowser.com">Email us</a
+        >
+      </div> -->
+      <div class="justify-self-end">
+        <a
+          href="https://www.producthunt.com/products/nook-an-open-source-arc-alternative?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-nook-an-open-source-arc-alternative"
+          target="_blank"
+          ><img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1022726&theme=light&t=1759533472842"
+            alt="Nook - An Open Source Arc Alternative - Fast, focused, and open — a new WebKit browser for Mac | Product Hunt"
+            style="width: 200px; height: 40px;"
+            width="200"
+            height="40"
+          /></a
+        >
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script is:inline>
+  (function () {
+    const EASE = "cubic-bezier(0.2, 0.8, 0.2, 1)";
+    const DEFAULT_DELAY = 40; // ms per item for stagger
+
+    function prime(el) {
+      if (el.__revealed) return;
+      el.style.opacity = "0";
+      el.style.transform =
+        el.dataset.revealOrigin === "x" ? "translateX(8px)" : "translateY(8px)";
+      el.style.filter = "blur(0.4px)";
+      el.style.transition = `opacity 700ms ${EASE}, transform 700ms ${EASE}, filter 700ms ${EASE}`;
+    }
+
+    function reveal(el, delay = 0) {
+      if (delay) el.style.transitionDelay = `${delay}ms`;
+      requestAnimationFrame(() => {
+        el.style.opacity = "1";
+        el.style.transform = "translate(0, 0)";
+        el.style.filter = "blur(0)";
+        el.__revealed = true;
+      });
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const el = entry.target;
+          if (entry.isIntersecting) {
+            const d = Number(el.getAttribute("data-reveal-delay") || 0);
+            reveal(el, d);
+            io.unobserve(el);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.14 }
+    );
+
+    // Stagger: if a parent has data-reveal-parent, apply delays to its children
+    document.querySelectorAll("[data-reveal-parent]")?.forEach((parent) => {
+      const items = parent.querySelectorAll("[data-reveal]");
+      items.forEach((el, i) => {
+        if (!el.hasAttribute("data-reveal-delay")) {
+          el.setAttribute("data-reveal-delay", String(i * DEFAULT_DELAY));
+        }
+      });
+    });
+
+    const all = document.querySelectorAll("[data-reveal]");
+    all.forEach((el) => {
+      prime(el);
+      io.observe(el);
+    });
+  })();
+</script>
