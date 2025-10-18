@@ -3,8 +3,10 @@ import Logo from "./Logo.svelte";
 import NavBar from "./NavBar.astro";
 ---
 
-<header class="fixed top-4 left-0 right-0 z-50">
-  <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-4 py-4 mx-16">
+<header class="fixed top-2 md:top-4 left-0 right-0 z-50">
+  <div
+    class="grid items-center gap-2 sm:gap-3 md:gap-4 grid-cols-2 md:grid-cols-[1fr_auto_1fr] py-3 md:py-4 mx-4 sm:mx-8 md:mx-16"
+  >
     <Logo className="w-8" href="/" />
     <NavBar />
     <div class="justify-self-end flex gap-2">
@@ -35,4 +37,4 @@ import NavBar from "./NavBar.astro";
     </div>
   </div>
 </header>
-<div class="h-16 md:h-20"></div>
+<div class="h-14 sm:h-16 md:h-20"></div>

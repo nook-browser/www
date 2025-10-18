@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import SEO from "../components/SEO.astro";
 
 type GHMilestone = {
   id: number;
@@ -64,7 +65,11 @@ function percent(closed: number, total: number): number {
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Roadmap — Nook</title>
+    <title>Roadmap — Nook Browser</title>
+    <SEO
+      title="Roadmap — Nook Browser"
+      description="What's in flight and what's next for Nook Browser."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

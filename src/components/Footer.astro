@@ -10,10 +10,10 @@ const excludeMt16 = ["download"];
   class={`border-t border-black/10 ${excludeMt16.includes(Astro.url.pathname) ? "mt-16" : ""}`}
 >
   <div
-    class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] py-10 text-sm"
+    class="container mx-auto max-w-[1120px] px-[clamp(16px,5vw,28px)] py-10 text-sm"
   >
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-[#6b6b62]"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-[#6b6b62]"
     >
       <div>
         <div class="text-[#373230] font-semibold text-base">Nook Browser</div>
@@ -96,7 +96,7 @@ const excludeMt16 = ["download"];
     </div>
 
     <div
-      class="mt-8 pt-6 border-top border-black/10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+      class="mt-8 pt-6 border-top border-black/10 flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between"
     >
       <div class="text-[#6b6b62]">© {year} Nook Browser</div>
       <!-- <div class="flex flex-wrap gap-2">

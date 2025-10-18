@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import { CORE_TEAM, type CoreMember } from "../data/team";
 import Header from "../components/Header.astro";
+import SEO from "../components/SEO.astro";
 
 export const prerender = false;
 
@@ -76,7 +77,11 @@ const refinedContributors = Array.from(contributorMap.values());
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Team — Nook</title>
+    <title>Team — Nook Browser</title>
+    <SEO
+      title="Team — Nook Browser"
+      description="People behind Nook and our amazing contributors."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -88,7 +93,7 @@ const refinedContributors = Array.from(contributorMap.values());
     <Header />
 
     <section
-      class="max-w-3xl mx-auto px-6 pt-20 md:pt-28 pb-10 text-center"
+      class="max-w-3xl mx-auto px-6 pt-24 md:pt-28 pb-10 text-center"
       data-reveal-parent
     >
       <h1
@@ -115,7 +120,7 @@ const refinedContributors = Array.from(contributorMap.values());
       </h2>
       <ul
         data-reveal
-        class="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+        class="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4"
       >
         {
           members.map((m) => (
@@ -182,7 +187,7 @@ const refinedContributors = Array.from(contributorMap.values());
       </h2>
       <ul
         data-reveal
-        class="mt-3 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2"
+        class="mt-3 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2"
       >
         {
           refinedContributors.map((c) => (

@@ -3,6 +3,7 @@ import Logo from "../../components/Logo.svelte";
 import Footer from "../../components/Footer.astro";
 import "../../styles/global.css";
 import Header from "../../components/Header.astro";
+import SEO from "../../components/SEO.astro";
 
 export const prerender = false;
 
@@ -126,6 +127,10 @@ function styleForTag(tag: string): string {
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{entry.title} — What's New</title>
+    <SEO
+      title={`${entry.title} — What's New`}
+      description={entry.summary ?? "Nook release note."}
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

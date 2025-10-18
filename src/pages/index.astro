@@ -3,6 +3,7 @@ import Logo from "../components/Logo.svelte";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
+import SEO from "../components/SEO.astro";
 import FloatingBanner, {
   fetchLatestChangelog,
 } from "../components/FloatingBanner.svelte";
@@ -19,7 +20,11 @@ const latest = await fetchLatestChangelog();
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>Nook — Open-source, Private, Forever</title>
+    <title>Nook Browser</title>
+    <SEO
+      title="Nook Browser"
+      description="Fast, focused, and open — a modern WebKit browser for Mac."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,7 +37,7 @@ const latest = await fetchLatestChangelog();
     <Header />
 
     <section
-      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] text-center pt-[clamp(36px,16vw,100px)] pb-0"
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,5vw,28px)] text-center pt-[clamp(72px,18vw,120px)] pb-0"
       data-reveal-parent
     >
       <h1
@@ -98,13 +103,13 @@ const latest = await fetchLatestChangelog();
     </div> -->
 
     <div
-      class="w-full flex justify-center mt-[clamp(28px,6vw,56px)] px-[clamp(16px,2vw,28px)]"
+      class="w-full flex justify-center mt-[clamp(20px,6vw,56px)] px-[clamp(12px,4vw,28px)]"
       data-reveal
       data-reveal-delay="180"
     >
       <video
-        src="/hero.mp4"
-        class="w-full max-w-[min(970px,92vw)] object-contain rounded-2xl"
+        src="/vids/hero.mp4"
+        class="w-full max-w-[min(970px,92vw)] object-contain rounded-xl sm:rounded-2xl"
         autoplay
         loop
         muted
@@ -115,7 +120,9 @@ const latest = await fetchLatestChangelog();
       class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] py-[clamp(36px,10vw,72px)]"
       data-reveal-parent
     >
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
+      >
         <div
           data-reveal
           class="rounded-2xl border border-black/10 bg-white/70 backdrop-blur-md p-6"
@@ -195,6 +202,78 @@ const latest = await fetchLatestChangelog();
             Transparent code, permissive license, and a community-driven
             roadmap.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT PREVIEW / GALLERY -->
+    <section
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-[clamp(42px,10vw,96px)]"
+      data-reveal-parent
+    >
+      <div class="grid lg:grid-cols-2 gap-6">
+        <figure
+          class="rounded-2xl border border-[#e2dec7] overflow-hidden bg-white/70 shadow-[0_40px_80px_-48px_rgba(7,20,15,.20)]"
+          data-reveal
+        >
+          <video
+            src="/vids/sidebar.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            class="w-full h-full object-cover"
+            preload="metadata"></video>
+          <div
+            class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
+               bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
+          >
+            Sidebar & Spaces
+          </div>
+        </figure>
+        <div class="grid gap-6">
+          <div class="relative">
+            <figure
+              class="rounded-2xl border border-[#e2dec7] overflow-hidden bg-white/70 shadow-[0_32px_64px_-44px_rgba(7,20,15,.17)]"
+              data-reveal
+            >
+              <video
+                src="/vids/ai.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+                class="w-full h-full object-cover"
+                preload="metadata"></video>
+            </figure>
+            <div
+              class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
+               bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
+            >
+              Ask Nook
+            </div>
+          </div>
+          <div class="relative">
+            <figure
+              class="rounded-2xl border border-[#e2dec7] overflow-hidden bg-white/70 shadow-[0_32px_64px_-44px_rgba(7,20,15,.17)]"
+              data-reveal
+            >
+              <video
+                src="/vids/extensions.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+                class="w-full h-full object-cover"
+                preload="metadata"></video>
+            </figure>
+            <div
+              class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
+               bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
+            >
+              Chrome Extensions
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -285,7 +364,5 @@ const latest = await fetchLatestChangelog();
         </div>
       </div>
     </section>
-  </body>
-
-  <Footer />
+  </body><Footer />
 </html>
