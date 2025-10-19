@@ -1,0 +1,54 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  url?: string;
+  image?: string;
+  type?: string;
+  canonical?: string;
+  jsonLd?: any;
+}
+
+const {
+  title = "Nook Browser",
+  description = "Fast, focused, and open — a modern WebKit browser for Mac.",
+  url = "https://browsewithnook.com",
+  image = "/og.png",
+  type = "website",
+  canonical = url,
+  jsonLd,
+} = Astro.props as Props;
+
+const site = (Astro.site ? String(Astro.site) : undefined) ?? undefined;
+const resolvedUrl =
+  url ?? (site ? new URL(Astro.url.pathname, site).toString() : undefined);
+const resolvedCanonical = canonical ?? resolvedUrl;
+const resolvedImage =
+  image ?? (site ? new URL("/og.png", site).toString() : undefined);
+---
+
+<Fragment>
+  <meta name="description" content={description} />
+  {resolvedCanonical && <link rel="canonical" href={resolvedCanonical} />}
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {resolvedUrl && <meta property="og:url" content={resolvedUrl} />}
+  {resolvedImage && <meta property="og:image" content={resolvedImage} />}
+  <meta property="og:type" content={type} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@browsewithnook" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {resolvedImage && <meta name="twitter:image" content={resolvedImage} />}
+
+  <!-- JSON-LD -->
+  {
+    jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )
+  }
+</Fragment>

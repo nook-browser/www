@@ -9,6 +9,39 @@ import FloatingBanner, {
 } from "../components/FloatingBanner.svelte";
 
 const latest = await fetchLatestChangelog();
+
+const questions = [
+  {
+    question: "What is Nook Browser?",
+    answer:
+      "Nook is a fast, modern WebKit browser for macOS focused on minimalism, privacy, and calm design.",
+  },
+  {
+    question: "Is it free and open‑source?",
+    answer:
+      "Yes. Nook Browser is open‑source and free to use. You can explore and support the project on GitHub and Open Collective.",
+  },
+  {
+    question: "Do you sell my browsing data?",
+    answer:
+      "No. We do not sell your browsing data. Our pledge is privacy first, with settings that are understandable and reversible.",
+  },
+  {
+    question: "Does Nook Browser support Chrome extensions?",
+    answer:
+      "Yes. Nook Browser supports Chrome extensions (still in alpha) so you can keep your workflow familiar.",
+  },
+  {
+    question: "Is AI required to use Nook Browser?",
+    answer:
+      "No. AI features are strictly opt‑in. The browser is fast and fully usable without them.",
+  },
+  {
+    question: "Where can I download Nook Browser?",
+    answer:
+      "You can download Nook Browser from our website or the GitHub Releases page. It's a simple DMG file that you can drag and drop to your Applications folder.",
+  },
+];
 ---
 
 <html
@@ -82,6 +115,270 @@ const latest = await fetchLatestChangelog();
           href="https://opencollective.com/nook-browser"
           ><span>Support Us</span></a
         >
+      </div>
+    </section>
+
+    <section
+      class="hidden container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] py-[clamp(48px,12vw,120px)]"
+      data-reveal-parent
+    >
+      <h2
+        class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight [font-family:var(--font-rethink)] text-[#373230]"
+        data-reveal
+      >
+        Frequently asked questions
+      </h2>
+      <div
+        class="mt-6 sm:mt-8 divide-y divide-black/10 [&_summary::-webkit-details-marker]:hidden [&_summary::marker]:hidden"
+      >
+        <details class="group py-4 sm:py-5" data-reveal>
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >What is Nook?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+            Nook is a fast, modern WebKit browser for macOS focused on
+            minimalism, privacy, and calm design.
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="60">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Is it free and open‑source?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+            Yes. Nook is open‑source and free to use. You can explore and
+            support the project on GitHub and Open Collective.
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="120">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Do you sell my browsing data?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+            No. We do not sell your browsing data. Our pledge is privacy first,
+            with settings that are understandable and reversible.
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="180">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Does Nook support Chrome extensions?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+            Yes. Nook supports Chrome extensions so you can keep your workflow
+            familiar.
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="240">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Is AI required to use Nook?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+            No. AI features are strictly opt‑in. The browser is fast and fully
+            usable without them.
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="300">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Where can I download Nook?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+            Visit the <a
+              href="/download"
+              class="underline decoration-black/20 underline-offset-2 hover:decoration-black/40"
+              >download</a
+            > page to get the latest build for macOS.
+          </div>
+        </details>
       </div>
     </section>
 
@@ -364,5 +661,353 @@ const latest = await fetchLatestChangelog();
         </div>
       </div>
     </section>
+
+    <section
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-[clamp(42px,10vw,96px)]"
+      data-reveal-parent
+      data-faq
+    >
+      <h2
+        class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight [font-family:var(--font-rethink)] text-[#373230]"
+        data-reveal
+      >
+        Frequently asked questions
+      </h2>
+      <div
+        class="mt-6 sm:mt-8 divide-y divide-black/10 [&_summary::-webkit-details-marker]:hidden [&_summary::marker]:hidden"
+      >
+        {
+          questions.map((question) => (
+            <Fragment key={question.question}>
+              <details class="group py-4 sm:py-5" data-reveal>
+                <summary class="flex items-start justify-between gap-6 cursor-pointer">
+                  <span class="text-base sm:text-lg font-medium text-[#373230]">
+                    {question.question}
+                  </span>
+                  <span class="mt-1 shrink-0">
+                    <svg
+                      class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 5v14" />
+                      <path d="M5 12h14" />
+                    </svg>
+                    <svg
+                      class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14" />
+                    </svg>
+                  </span>
+                </summary>
+                <div class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out">
+                  <div class="mt-2 pr-10 text-sm sm:text-base leading-relaxed text-[#6b6b62]">
+                    {question.answer}
+                  </div>
+                </div>
+              </details>
+            </Fragment>
+          ))
+        }
+        <!--
+        <details class="group py-4 sm:py-5" data-reveal>
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >What is Nook?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out"
+          >
+            <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+              Nook is a fast, modern WebKit browser for macOS focused on
+              minimalism, privacy, and calm design.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="60">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Is it free and open‑source?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out"
+          >
+            <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+              Yes. Nook is open‑source and free to use. You can explore and
+              support the project on GitHub and Open Collective.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="120">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Do you sell my browsing data?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out"
+          >
+            <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+              No. We do not sell your browsing data. Our pledge is privacy
+              first, with settings that are understandable and reversible.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="180">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Does Nook support Chrome extensions?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out"
+          >
+            <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+              Yes. Nook supports Chrome extensions so you can keep your workflow
+              familiar.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="240">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Is AI required to use Nook?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out"
+          >
+            <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+              No. AI features are strictly opt‑in. The browser is fast and fully
+              usable without them.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-4 sm:py-5" data-reveal data-reveal-delay="300">
+          <summary
+            class="flex items-start justify-between gap-6 cursor-pointer"
+          >
+            <span class="text-base sm:text-lg font-medium text-[#373230]"
+              >Where can I download Nook?</span
+            >
+            <span class="mt-1 shrink-0">
+              <svg
+                class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              <svg
+                class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out"
+          >
+            <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
+              Visit the <a
+                href="/download"
+                class="underline decoration-black/20 underline-offset-2 hover:decoration-black/40"
+                >download</a
+              > page to get the latest build for macOS.
+            </div>
+          </div>
+        </details> -->
+      </div>
+    </section>
+    <style is:inline>
+      section[data-faq] details > .faq-content {
+        max-height: 0;
+      }
+      section[data-faq] details[open] > .faq-content {
+        max-height: 640px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        section[data-faq] details > .faq-content {
+          transition: none;
+        }
+      }
+    </style>
   </body><Footer />
 </html>
