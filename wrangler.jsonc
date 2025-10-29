@@ -3,9 +3,9 @@
 	"account_id": "023bd92a75a06054e492de880b0ded6e",
 	"main": "dist/_worker.js/index.js",
 	"assets": {
-    "directory": "./dist",
-    "binding": "ASSETS"
-  },
+        "directory": "./dist",
+        "binding": "ASSETS"
+    },
 	"routes": [
 		{
 			"pattern": "dev.browsewithnook.com",
@@ -13,8 +13,8 @@
 		}
 	],
 	"compatibility_flags": [
-    "nodejs_compat",
-    "global_fetch_strictly_public"
-  ],
+        "nodejs_compat",
+        "global_fetch_strictly_public"
+    ],
  	"compatibility_date": "2025-01-01"
 }
