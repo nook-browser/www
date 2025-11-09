@@ -1,43 +1,33 @@
-# Astro Starter Kit: Minimal
+# Nook Browser — Waitlist & Changelog
 
-```sh
-npm create astro@latest -- --template minimal
+[![Live](https://img.shields.io/badge/Live-Preview%20Hosted%20on%20Vercel-0f2b1f)](https://nook-www-preview.vercel.app)
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/2gX69DuWwX)
+[![Roadmap](https://img.shields.io/badge/Roadmap-View-0f2b1f)](https://nook-www-preview.vercel.app/roadmap)
+![Built with SvelteKit](https://img.shields.io/badge/Built%20with-SvelteKit-ff3e00?logo=svelte&logoColor=white)
+
+A minimal, cozy landing page/changelog for the Nook Browser with a Sanity-powered changelog and a GitHub-backed roadmap.
+
+![Cover](public/og-default.png)
+
+## Quick start
+
+```bash
+pnpm i        # or npm i / yarn
+pnpm dev      # start dev server
+pnpm build    # build for production
+pnpm preview  # preview production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Environment
 
-## 🚀 Project Structure
+Create `.env` (or set in your host):
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```env
+PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+PUBLIC_SANITY_DATASET=production
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Links
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Site: https://browsewithnook.com
+- Discord: https://discord.gg/2gX69DuWwX
