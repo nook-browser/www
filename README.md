@@ -7,7 +7,7 @@
 
 A minimal, cozy landing page/changelog for the Nook Browser with a Sanity-powered changelog and a GitHub-backed roadmap.
 
-![Cover](public/og-default.png)
+![Cover](public/og.png)
 
 ## Quick start
 
