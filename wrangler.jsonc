@@ -8,7 +8,7 @@
     },
 	"routes": [
 		{
-			"pattern": "dev.browsewithnook.com",
+			"pattern": "browsewithnook.com",
 			"custom_domain": true
 		}
 	],
