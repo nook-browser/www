@@ -3,7 +3,7 @@
 [![Live](https://img.shields.io/badge/Live-Preview%20Hosted%20on%20Vercel-0f2b1f)](https://nook-www-preview.vercel.app)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/2gX69DuWwX)
 [![Roadmap](https://img.shields.io/badge/Roadmap-View-0f2b1f)](https://nook-www-preview.vercel.app/roadmap)
-![Built with SvelteKit](https://img.shields.io/badge/Built%20with-SvelteKit-ff3e00?logo=svelte&logoColor=white)
+![Built with Astro](https://img.shields.io/badge/Built%20with-Astro-ff3e00?logo=astro&logoColor=white)
 
 A minimal, cozy landing page/changelog for the Nook Browser with a Sanity-powered changelog and a GitHub-backed roadmap.
 
