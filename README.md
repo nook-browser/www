@@ -22,16 +22,8 @@ pnpm build    # build for production
 pnpm preview  # preview production build
 ```
 
-## Environment
-
-Create `.env` (or set in your host):
-
-```env
-PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
-PUBLIC_SANITY_DATASET=production
-```
-
 ## Links
 
 - Site: https://browsewithnook.com
 - Discord: https://discord.gg/2gX69DuWwX
+- Open Collective: https://opencollective.com/nook-browser
