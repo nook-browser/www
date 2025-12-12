@@ -7,6 +7,7 @@ import SEO from "../components/SEO.astro";
 import FloatingBanner, {
   fetchLatestChangelog,
 } from "../components/FloatingBanner.svelte";
+import AccordionItem from "../components/AccordionItem.astro";
 
 const latest = await fetchLatestChangelog();
 
@@ -22,9 +23,9 @@ const questions = [
       "Yes. Nook Browser is open‑source and free to use. You can explore and support the project on GitHub and Open Collective.",
   },
   {
-    question: "Do you sell my browsing data?",
+    question: "Do you collect my browsing data?",
     answer:
-      "No. We do not sell your browsing data. Our pledge is privacy first, with settings that are understandable and reversible.",
+      "No. We don’t collect it, so we can’t sell it. Your browsing activity stays on your device.",
   },
   {
     question: "Does Nook Browser support Chrome extensions?",
@@ -85,8 +86,8 @@ const questions = [
         data-reveal
         data-reveal-delay="90"
       >
-        The memory of web browsing being quick and easy lives with us all.
-        Fewer pop-ups, less clutter, and finding what you need ASAP.
+        The memory of web browsing being quick and easy lives with us all. Fewer
+        pop-ups, less clutter, and finding what you need ASAP.
       </p>
       <div
         class="flex justify-center gap-3 mt-[36px]"
@@ -601,7 +602,7 @@ const questions = [
                   aria-hidden="true"
                   ><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"
                   ></path></svg
-                ><span>No selling of browsing data. Ever.</span>
+                ><span>We don’t collect your browsing data.</span>
               </li>
               <li class="flex items-start gap-2">
                 <svg
@@ -649,6 +650,8 @@ const questions = [
               </a>
               <a
                 href="https://opencollective.com/nook-browser"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171717] text-white text-sm font-medium border border-[#0f0f0e]"
               >
                 <span>Support the project</span>
@@ -673,55 +676,24 @@ const questions = [
       >
         Frequently asked questions
       </h2>
-      <div
-        class="mt-6 sm:mt-8 divide-y divide-black/10 [&_summary::-webkit-details-marker]:hidden [&_summary::marker]:hidden"
-      >
+      <div class="mt-6 sm:mt-8 divide-y divide-black/10">
         {
           questions.map((question) => (
-            <Fragment key={question.question}>
-              <details class="group py-4 sm:py-5" data-reveal>
-                <summary class="flex items-start justify-between gap-6 cursor-pointer">
-                  <span class="text-base sm:text-lg font-medium text-[#373230]">
-                    {question.question}
-                  </span>
-                  <span class="mt-1 shrink-0">
-                    <svg
-                      class="h-5 w-5 text-[#171717] group-open:hidden transition-transform duration-300 ease-out"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 5v14" />
-                      <path d="M5 12h14" />
-                    </svg>
-                    <svg
-                      class="hidden h-5 w-5 text-[#171717] group-open:block transition-transform duration-300 ease-out"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14" />
-                    </svg>
-                  </span>
-                </summary>
-                <div class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out">
-                  <div class="mt-2 pr-10 text-sm sm:text-base leading-relaxed text-[#6b6b62]">
-                    {question.answer}
-                  </div>
-                </div>
-              </details>
-            </Fragment>
+            <AccordionItem
+              question={question.question}
+              answer={question.answer}
+            />
           ))
         }
-        <!--
+      </div>
+    </section>
+
+    <script>
+      import { initAccordion } from "../lib/accordion";
+      document.addEventListener("DOMContentLoaded", initAccordion);
+    </script>
+
+    <!--
         <details class="group py-4 sm:py-5" data-reveal>
           <summary
             class="flex items-start justify-between gap-6 cursor-pointer"
@@ -994,8 +966,7 @@ const questions = [
             </div>
           </div>
         </details> -->
-      </div>
-    </section>
+
     <style is:inline>
       section[data-faq] details > .faq-content {
         max-height: 0;
