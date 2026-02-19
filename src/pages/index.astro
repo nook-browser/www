@@ -4,10 +4,13 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import SEO from "../components/SEO.astro";
+import { ClientRouter } from "astro:transitions";
+
 import FloatingBanner, {
   fetchLatestChangelog,
 } from "../components/FloatingBanner.svelte";
 import AccordionItem from "../components/AccordionItem.astro";
+import ProgressiveBlur from "../components/ProgressiveBlur.astro";
 
 const latest = await fetchLatestChangelog();
 
@@ -28,9 +31,9 @@ const questions = [
       "No. We don’t collect it, so we can’t sell it. Your browsing activity stays on your device.",
   },
   {
-    question: "Does Nook Browser support Chrome extensions?",
+    question: "Does Nook support extensions?",
     answer:
-      "Yes. Nook Browser supports Chrome extensions (still in alpha) so you can keep your workflow familiar.",
+      "Yes. Nook supports both Chrome and Safari extensions so you can keep your workflow familiar.",
   },
   {
     question: "Is AI required to use Nook Browser?",
@@ -51,6 +54,8 @@ const questions = [
 >
   <head>
     <meta charset="utf-8" />
+    <ClientRouter />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
@@ -67,6 +72,7 @@ const questions = [
     />
   </head>
   <body class="min-h-screen w-full text-[#1b1b18] antialiased">
+    <ProgressiveBlur position="top" backgroundColor="#F1EFDF" fixed={true} height="80px" class="z-40" />
     <FloatingBanner latest={latest} client:load />
     <Header />
 
@@ -261,7 +267,7 @@ const questions = [
             class="flex items-start justify-between gap-6 cursor-pointer"
           >
             <span class="text-base sm:text-lg font-medium text-[#373230]"
-              >Does Nook support Chrome extensions?</span
+              >Does Nook support extensions?</span
             >
             <span class="mt-1 shrink-0">
               <svg
@@ -292,8 +298,8 @@ const questions = [
             </span>
           </summary>
           <div class="mt-2 pr-10 text-sm leading-relaxed text-[#6b6b62]">
-            Yes. Nook supports Chrome extensions so you can keep your workflow
-            familiar.
+            Yes. Nook supports both Chrome and Safari extensions so you can
+            keep your workflow familiar.
           </div>
         </details>
 
@@ -570,7 +576,7 @@ const questions = [
               class="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full
                bg-white/80 px-3 py-1 text-xs text-[#07140f]/70 shadow-sm backdrop-blur"
             >
-              Chrome Extensions
+              Chrome & Safari Extensions
             </div>
           </div>
         </div>
@@ -835,7 +841,7 @@ const questions = [
             class="flex items-start justify-between gap-6 cursor-pointer"
           >
             <span class="text-base sm:text-lg font-medium text-[#373230]"
-              >Does Nook support Chrome extensions?</span
+              >Does Nook support extensions?</span
             >
             <span class="mt-1 shrink-0">
               <svg

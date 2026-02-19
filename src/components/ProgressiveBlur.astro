@@ -1,0 +1,51 @@
+---
+interface Props {
+  class?: string;
+  backgroundColor?: string;
+  position?: "top" | "bottom";
+  height?: string;
+  blurAmount?: string;
+  fixed?: boolean;
+}
+
+const {
+  class: className = "",
+  backgroundColor = "#f5f4f3",
+  position = "top",
+  height = "150px",
+  blurAmount = "3px",
+  fixed = false,
+} = Astro.props;
+
+const isTop = position === "top";
+const positionClass = fixed ? "fixed" : "absolute";
+---
+
+<!-- Backdrop blur layer (subtle, masked so it fades out) -->
+<div
+  class:list={[`pointer-events-none ${positionClass} left-0 w-full select-none`, className]}
+  style={{
+    [isTop ? "top" : "bottom"]: "0",
+    height,
+    maskImage: isTop
+      ? `linear-gradient(to bottom, black 25%, transparent 100%)`
+      : `linear-gradient(to top, black 25%, transparent 100%)`,
+    WebkitMaskImage: isTop
+      ? `linear-gradient(to bottom, black 25%, transparent 100%)`
+      : `linear-gradient(to top, black 25%, transparent 100%)`,
+    WebkitBackdropFilter: `blur(${blurAmount})`,
+    backdropFilter: `blur(${blurAmount})`,
+  }}
+/>
+
+<!-- Color gradient layer on top (covers the blur artifacts on images) -->
+<div
+  class:list={[`pointer-events-none ${positionClass} left-0 w-full select-none`, className]}
+  style={{
+    [isTop ? "top" : "bottom"]: "0",
+    height,
+    background: isTop
+      ? `linear-gradient(to bottom, ${backgroundColor} 0%, ${backgroundColor}cc 20%, ${backgroundColor}00 100%)`
+      : `linear-gradient(to top, ${backgroundColor} 0%, ${backgroundColor}cc 20%, ${backgroundColor}00 100%)`,
+  }}
+/>

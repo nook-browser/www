@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+html, body {
+  background-color: #F1EFDF;
+}
+
+::selection {
+  background-color: rgba(214, 210, 192, 0.45);
+  color: #373230;
+}
+
+/* Page-load blur-in animation for list items */
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.animate-blur-in {
+  animation: blur-in 0.55s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: calc(var(--stagger, 0) * 60ms + 200ms);
+}
+
 @theme {
   --font-urbanist: "Urbanist", ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji",

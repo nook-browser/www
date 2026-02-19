@@ -5,6 +5,8 @@ import "../styles/global.css";
 import { CORE_TEAM, type CoreMember } from "../data/team";
 import Header from "../components/Header.astro";
 import SEO from "../components/SEO.astro";
+import { ClientRouter } from "astro:transitions";
+
 
 export const prerender = false;
 
@@ -75,6 +77,8 @@ const refinedContributors = Array.from(contributorMap.values());
 >
   <head>
     <meta charset="utf-8" />
+    <ClientRouter />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Team — Nook Browser</title>

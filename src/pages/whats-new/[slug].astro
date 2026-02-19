@@ -4,6 +4,8 @@ import Footer from "../../components/Footer.astro";
 import "../../styles/global.css";
 import Header from "../../components/Header.astro";
 import SEO from "../../components/SEO.astro";
+import { ClientRouter } from "astro:transitions";
+
 
 export const prerender = false;
 
@@ -108,14 +110,7 @@ function pickTag(tags: (string | undefined | null)[]): string | undefined {
   return t ?? undefined;
 }
 
-function styleForTag(tag: string): string {
-  const map: Record<string, string> = {
-    New: "bg-[#171717] text-[#f9f8f4]",
-    Fix: "bg-[#17202a] text-[#f9f8f4]",
-    Improved: "bg-[#efe9d0] text-[#07140f] border border-[#e2dec7]",
-  };
-  return map[tag] ?? "bg-[#efe9d0] text-[#07140f] border border-[#e2dec7]";
-}
+const badgeStyle = "bg-[#efe9d0] text-[#07140f]/50 border border-[#e2dec7]";
 ---
 
 <html
@@ -124,6 +119,8 @@ function styleForTag(tag: string): string {
 >
   <head>
     <meta charset="utf-8" />
+    <ClientRouter />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{entry.title} — What's New</title>
@@ -145,9 +142,10 @@ function styleForTag(tag: string): string {
       class="max-w-3xl mx-auto px-6 pt-20 md:pt-28 pb-14"
       data-reveal-parent
     >
-      <div class="text-sm text-[#07140f]/60" data-reveal>
-        <a href="/whats-new" class="hover:text-[#07140f]">Changelog</a>
-        · {monthLabel(dateObj)}
+      <div class="text-sm text-[#07140f]/50" data-reveal>
+        <a href="/whats-new" class="hover:text-[#07140f] transition-colors duration-150">Changelog</a>
+        <span class="mx-1.5 text-[#07140f]/30">/</span>
+        <span>{monthLabel(dateObj)}</span>
       </div>
       <h1
         data-reveal
@@ -167,7 +165,7 @@ function styleForTag(tag: string): string {
         <div class="flex items-center gap-1.5">
           {
             entry.version && (
-              <span class="rounded-full bg-[#476341] text-[#f9f8f4] px-2 py-0.5 text-[11px] font-semibold">
+              <span class={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${badgeStyle}`}>
                 {entry.version}
               </span>
             )
@@ -175,7 +173,7 @@ function styleForTag(tag: string): string {
           {
             pickTag([entry.tag]) && (
               <span
-                class={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${styleForTag(pickTag([entry.tag]) as string)}`}
+                class={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${badgeStyle}`}
               >
                 {pickTag([entry.tag])}
               </span>
@@ -251,7 +249,7 @@ function styleForTag(tag: string): string {
         data-reveal
         data-reveal-delay="240"
       >
-        <a href="/whats-new" class="hover:text-[#07140f]">← Back to changelog</a
+        <a href="/whats-new" class="inline-flex items-center gap-1.5 hover:text-[#07140f] transition-colors duration-150"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6" /></svg>Back to changelog</a
         >
       </div>
     </section>

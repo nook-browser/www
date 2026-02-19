@@ -1,23 +1,33 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const links = [
+  { href: "/whats-new", label: "What's New" },
+  { href: "/roadmap", label: "Roadmap" },
+  { href: "/team", label: "Team" },
+  { href: "https://opencollective.com/nook-browser", label: "Support Us", external: true },
+];
+---
+
 <nav
-  class="hidden md:inline-flex gap-1 p-1 rounded-full border border-black/10 bg-white/60 backdrop-blur-md [font-family:var(--font-urbanist)] text-[#575757]"
+  class="hidden md:inline-flex gap-0.5 p-1 rounded-full border border-black/10 bg-white/60 backdrop-blur-md [font-family:var(--font-urbanist)] text-[#575757] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.04),0px_4px_6px_0px_rgba(0,0,0,0.02),inset_0px_1px_0px_0px_rgba(255,255,255,0.7),inset_0px_-1px_2px_0px_rgba(0,0,0,0.03)]"
   aria-label="Primary"
 >
-  <a
-    class="text-sm px-3 py-2 rounded-full border border-transparent hover:opacity-80"
-    href="/whats-new">What's New</a
-  >
-  <a
-    class="text-sm px-3 py-2 rounded-full border border-transparent hover:opacity-80"
-    href="/roadmap">Roadmap</a
-  >
-  <a
-    class="text-sm px-3 py-2 rounded-full border border-transparent hover:opacity-80"
-    href="/team">Team</a
-  >
-  <a
-    class="text-sm px-3 py-2 rounded-full border border-transparent hover:opacity-80"
-    href="https://opencollective.com/nook-browser"
-    target="_blank"
-    rel="noopener noreferrer">Support Us</a
-  >
+  {links.map((link) => {
+    const isActive = !link.external && path.startsWith(link.href);
+    return (
+      <a
+        class:list={[
+          "text-sm px-3.5 py-2 rounded-full border transition-all duration-200",
+          isActive
+            ? "bg-[#F1EFDF]/80 border-[#d6d2c0]/40 text-[#373230] font-semibold shadow-[0px_1px_2px_0px_rgba(0,0,0,0.04),inset_0px_1px_0px_0px_rgba(255,255,255,0.6)]"
+            : "border-transparent hover:bg-[#F1EFDF]/50 hover:text-[#373230]",
+        ]}
+        href={link.href}
+        {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        {link.label}
+      </a>
+    );
+  })}
 </nav>

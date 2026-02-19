@@ -47,4 +47,9 @@ export const CORE_TEAM: CoreMember[] = [
     customPfp: "/pfp/kacper.png",
     email: "kacper@browsewithnook.com",
   },
+  {
+    login: "Aeastr",
+    name: "Aether",
+    role: "Design Engineer",
+  },
 ];

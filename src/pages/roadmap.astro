@@ -3,6 +3,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import SEO from "../components/SEO.astro";
+import { ClientRouter } from "astro:transitions";
+
 
 type GHMilestone = {
   id: number;
@@ -55,6 +57,14 @@ function percent(closed: number, total: number): number {
   const p = Math.round((closed / t) * 100);
   return Number.isFinite(p) ? p : 0;
 }
+
+function shortDate(iso?: string): string {
+  if (!iso) return "";
+  return new Date(iso).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+  });
+}
 ---
 
 <html
@@ -63,6 +73,8 @@ function percent(closed: number, total: number): number {
 >
   <head>
     <meta charset="utf-8" />
+    <ClientRouter />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roadmap — Nook Browser</title>
@@ -80,150 +92,184 @@ function percent(closed: number, total: number): number {
   <body class="min-h-screen w-full text-[#1b1b18] antialiased">
     <Header />
 
+    <!-- Header -->
     <section
-      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] text-center pt-[clamp(36px,16vw,100px)] pb-0"
+      class="container mx-auto max-w-[1120px] px-[clamp(16px,5vw,28px)] text-center pt-[clamp(72px,18vw,120px)] pb-0"
       data-reveal-parent
     >
       <h1
-        class="font-medium tracking-tight leading-[1.1] text-3xl sm:text-5xl md:text-6xl [font-family:var(--font-rethink)] text-[#373230]"
+        class="font-medium tracking-tight leading-[1.1] text-2xl sm:text-3xl md:text-4xl [font-family:var(--font-rethink)] text-[#373230]"
         data-reveal
       >
         Roadmap
       </h1>
-      <p class="mt-3 text-[#6b6b62] text-sm" data-reveal data-reveal-delay="90">
+      <p
+        class="mt-3 text-[#6b6b62] text-[clamp(13px,1.4vw,16px)] leading-normal"
+        data-reveal
+        data-reveal-delay="90"
+      >
         What's in flight and what's next for Nook.
       </p>
     </section>
 
+    <!-- Milestones -->
     <section
-      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] py-[clamp(24px,8vw,56px)]"
-      data-reveal-parent
+      class="container mx-auto max-w-[860px] px-[clamp(16px,5vw,28px)] pt-[clamp(32px,8vw,56px)]"
     >
-      <div class="flex items-center justify-between" data-reveal>
-        <h2 class="text-sm font-semibold tracking-wide text-[#07140f]/70">
+      <div class="flex items-center justify-between mb-4 animate-blur-in" style="--stagger: 0">
+        <h2 class="text-sm font-medium text-[#9b9688]">
           Focus
         </h2>
         <a
           href={`https://github.com/${org}/${repo}/milestones`}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-xs text-[#6b6b62] hover:text-[#171717]">View all</a
-        >
+          class="text-xs text-[#9b9688] hover:text-[#373230] transition-colors duration-150"
+        >View on GitHub</a>
       </div>
-      <div class="mt-3 space-y-3">
+
+      {
+        milestones.length === 0 && (
+          <div
+            class="rounded-2xl border border-[#e2dec7] bg-white/50 p-8 text-center text-[#9b9688] text-sm animate-blur-in"
+            style="--stagger: 1"
+          >
+            No active milestones right now.
+          </div>
+        )
+      }
+
+      <div
+        class="rounded-2xl border border-[#e2dec7] bg-white/50 backdrop-blur-sm shadow-[0px_1px_3px_0px_rgba(0,0,0,0.03),inset_0px_1px_0px_0px_rgba(255,255,255,0.5)] overflow-hidden divide-y divide-[#e2dec7] animate-blur-in"
+        style="--stagger: 1"
+      >
         {
-          milestones.length === 0 && (
-            <div
-              class="rounded-2xl border border-black/10 bg-white/60 backdrop-blur-md p-6 text-[#6b6b62]"
-              data-reveal
-            >
-              No active milestones right now.
-            </div>
-          )
-        }
-        {
-          milestones.map((m, i) => (
-            <div
-              class="rounded-2xl border border-black/10 bg-white/60 backdrop-blur-md p-6"
-              data-reveal
-              data-reveal-delay={String(i * 70)}
-            >
-              <div class="flex items-start justify-between gap-3">
-                <div>
-                  <a
-                    href={m.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-[#373230] font-semibold hover:opacity-80 line-clamp-2"
-                  >
-                    {m.title}
-                  </a>
+          milestones.map((m, i) => {
+            const pct = percent(m.closed_issues, m.open_issues);
+            const total = m.closed_issues + m.open_issues;
+            return (
+              <a
+                href={m.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="roadmap-row flex items-center gap-4 px-5 py-4 transition-colors duration-150 hover:bg-white/60 animate-blur-in"
+                style={`--stagger: ${i + 1}`}
+              >
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2.5 flex-wrap">
+                    <span class="text-sm font-medium text-[#373230] line-clamp-1">
+                      {m.title}
+                    </span>
+                    <div class="roadmap-badges flex items-center gap-1.5">
+                      <span class="rounded-full bg-[#efe9d0] text-[#07140f]/50 border border-[#e2dec7] px-2 py-0.5 text-[10px] font-semibold tabular-nums">
+                        {pct}%
+                      </span>
+                      {m.due_on && (
+                        <span class="hidden sm:inline-flex rounded-full bg-[#efe9d0] text-[#07140f]/50 border border-[#e2dec7] px-2 py-0.5 text-[10px] font-semibold">
+                          {shortDate(m.due_on)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                   {m.description && (
-                    <p class="mt-1.5 text-sm text-[#6b6b62] line-clamp-2">
+                    <p class="mt-1 text-xs text-[#9b9688] line-clamp-1">
                       {m.description}
                     </p>
                   )}
                 </div>
-                {m.due_on && (
-                  <span class="shrink-0 rounded-full bg-[#efe9d0] text-[#07140f] border border-[#e2dec7] px-2 py-0.5 text-[11px] font-semibold">
-                    due {new Date(m.due_on).toLocaleDateString()}
-                  </span>
-                )}
-              </div>
-              <div class="mt-4">
-                <div class="h-2 rounded-full bg-[#efe9d0] overflow-hidden border border-[#e2dec7]/70">
-                  <div
-                    class="h-full bg-[#171717]"
-                    style={`width:${percent(m.closed_issues, m.open_issues)}%`}
-                  />
+                <div class="shrink-0 text-xs tabular-nums text-[#9b9688] hidden sm:block">
+                  {m.closed_issues}/{total}
                 </div>
-                <div class="mt-1.5 text-xs text-[#6b6b62]">
-                  {m.closed_issues} closed • {m.open_issues} open
-                </div>
-              </div>
-            </div>
-          ))
+              </a>
+            );
+          })
         }
       </div>
     </section>
 
+    <!-- Backlog -->
     <section
-      class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-[clamp(42px,10vw,96px)]"
-      data-reveal-parent
+      class="container mx-auto max-w-[860px] px-[clamp(16px,5vw,28px)] pt-[clamp(40px,8vw,64px)] pb-[clamp(42px,10vw,96px)]"
     >
-      <div class="flex items-center justify-between" data-reveal>
-        <h2 class="text-sm font-semibold tracking-wide text-[#07140f]/70">
+      <div class="flex items-center justify-between mb-5 animate-blur-in" style={`--stagger: ${milestones.length + 2}`}>
+        <h2 class="text-sm font-medium text-[#9b9688]">
           Ideas & backlog
         </h2>
-        <div class="flex items-center gap-2">
-          <a
-            href={`https://github.com/${org}/${repo}/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-xs text-[#6b6b62] hover:text-[#171717]">View all</a
-          >
-          <a
-            href={`https://github.com/${org}/${repo}/issues/new/choose`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/10 bg-white/70 text-xs text-[#171717] hover:bg-white/80"
-            >Suggest</a
-          >
-        </div>
+        <a
+          href={`https://github.com/${org}/${repo}/issues/new/choose`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium text-[#373230] transition-all duration-200 hover:brightness-95 active:brightness-90 bg-white border border-black/5 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_4px_4px_0px_rgba(0,0,0,0.02),inset_0px_-2px_2px_0px_rgba(0,0,0,0.02),inset_0px_1px_0px_0px_rgba(255,255,255,1)]"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 5v14" />
+            <path d="M5 12h14" />
+          </svg>
+          Suggest
+        </a>
       </div>
-      <ul class="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+      {
+        backlog.length === 0 && (
+          <div
+            class="rounded-2xl border border-[#e2dec7] bg-white/50 p-8 text-center text-[#9b9688] text-sm animate-blur-in"
+            style={`--stagger: ${milestones.length + 3}`}
+          >
+            No backlog items yet.
+          </div>
+        )
+      }
+
+      <div
+        class="rounded-2xl border border-[#e2dec7] bg-white/50 backdrop-blur-sm shadow-[0px_1px_3px_0px_rgba(0,0,0,0.03),inset_0px_1px_0px_0px_rgba(255,255,255,0.5)] overflow-hidden divide-y divide-[#e2dec7] animate-blur-in"
+        style={`--stagger: ${milestones.length + 3}`}
+      >
         {
           backlog.slice(0, 15).map((it, i) => (
-            <li
-              class="rounded-xl border border-black/10 bg-white/60 backdrop-blur-md p-4 text-left"
-              data-reveal
-              data-reveal-delay={String(i * 40)}
+            <a
+              href={it.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="roadmap-row flex items-center gap-4 px-5 py-4 transition-colors duration-150 hover:bg-white/60 animate-blur-in"
+              style={`--stagger: ${milestones.length + 3 + i}`}
             >
-              <a
-                href={it.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block hover:opacity-80"
-              >
-                <div class="text-sm font-medium text-[#07140f] line-clamp-2">
-                  {it.title}
+              <span class="shrink-0 text-xs tabular-nums text-[#9b9688]/60 w-6 text-right">
+                #{it.number}
+              </span>
+              <span class="flex-1 min-w-0 text-sm font-medium text-[#373230] line-clamp-1">
+                {it.title}
+              </span>
+              {Array.isArray(it.labels) && it.labels.length > 0 && (
+                <div class="hidden sm:flex items-center gap-1.5 shrink-0">
+                  {it.labels.slice(0, 2).map((l) => (
+                    <span class="rounded-full bg-[#efe9d0] text-[#07140f]/50 border border-[#e2dec7] px-2 py-0.5 text-[10px] font-semibold">
+                      {l?.name}
+                    </span>
+                  ))}
                 </div>
-                {Array.isArray(it.labels) && it.labels.length > 0 && (
-                  <div class="mt-2 flex flex-wrap gap-1.5">
-                    {it.labels.slice(0, 2).map((l) => (
-                      <span class="inline-flex items-center rounded-full bg-[#efe9d0] text-[#07140f] border border-[#e2dec7] px-2 py-0.5 text-[10px] font-semibold">
-                        {l?.name}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </a>
-            </li>
+              )}
+            </a>
           ))
         }
-      </ul>
+      </div>
+
+      {
+        backlog.length > 15 && (
+          <div class="mt-4 text-center animate-blur-in" style={`--stagger: ${milestones.length + 18}`}>
+            <a
+              href={`https://github.com/${org}/${repo}/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs text-[#9b9688] hover:text-[#373230] transition-colors duration-150"
+            >
+              View all {backlog.length} ideas on GitHub
+            </a>
+          </div>
+        )
+      }
     </section>
 
     <Footer />
+
   </body>
 </html>

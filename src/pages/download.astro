@@ -3,6 +3,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import SEO from "../components/SEO.astro";
+import { ClientRouter } from "astro:transitions";
+
 
 type GHAsset = {
   name: string;
@@ -58,6 +60,8 @@ const releaseUrl =
 >
   <head>
     <meta charset="utf-8" />
+    <ClientRouter />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Download — Nook Browser</title>
@@ -105,7 +109,7 @@ const releaseUrl =
       >
         <a
           href={macAsset?.browser_download_url ?? releaseUrl}
-          class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl bg-[#0f0f0e] text-white text-base font-medium border border-[#0f0f0e]"
+          class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl text-white text-base font-medium transition-all duration-200 hover:brightness-110 active:brightness-90 bg-[#1E1E1E] border border-white/10 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.1),0px_3px_3px_0px_rgba(0,0,0,0.08),0px_7px_4px_0px_rgba(0,0,0,0.05),0px_12px_5px_0px_rgba(0,0,0,0.02),0px_19px_5px_0px_rgba(0,0,0,0.01),inset_0px_-4px_4px_0px_rgba(255,255,255,0.1),inset_0px_0.5px_0px_0px_rgba(255,255,255,0.5)]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -121,10 +125,8 @@ const releaseUrl =
           <span>Download Alpha</span>
         </a>
         <a
-          class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl border border-black/10 bg-white/70 backdrop-blur-md text-base font-medium"
-          href="/whats-new"
-          target="_blank"
-          rel="noopener noreferrer"><span>What's New</span></a
+          class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl text-base font-medium transition-all duration-200 hover:brightness-95 active:brightness-90 bg-white border border-black/5 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),0px_4px_4px_0px_rgba(0,0,0,0.02),inset_0px_-2px_2px_0px_rgba(0,0,0,0.02),inset_0px_1px_0px_0px_rgba(255,255,255,1)]"
+          href="/whats-new"><span>What's New</span></a
         >
       </div>
       {
