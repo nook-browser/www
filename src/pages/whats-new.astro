@@ -6,42 +6,28 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import SEO from "../components/SEO.astro";
 import { ClientRouter } from "astro:transitions";
+import { fetchReleases } from "../lib/releases";
 
-
-const apiBase = "https://cms.browsewithnook.com";
-type CMSImage = {
-  url?: string;
-  alt?: string;
-  width?: number;
-  height?: number;
-};
 type ChangelogEntry = {
-  id: number | string;
+  id: string;
   title: string;
   slug: string;
   version?: string;
-  tag?: string;
   publishedAt?: string;
   createdAt?: string;
   summary?: string;
-  image?: CMSImage;
 };
 
 export const prerender = false;
 
-function formatDate(iso?: string): string {
-  if (!iso) return "";
-  return new Date(iso).toLocaleDateString();
-}
-
-const res = await fetch(`${apiBase}/api/changelog-entries/`, {
-  cache: "no-store",
-});
-if (!res.ok) {
-  throw new Error(`Failed to fetch changelog: ${res.status}`);
-}
-const data = (await res.json()) as { docs?: ChangelogEntry[] };
-const entries: ChangelogEntry[] = Array.isArray(data?.docs) ? data.docs : [];
+const entries: ChangelogEntry[] = (await fetchReleases()).map((r) => ({
+  id: r.tag,
+  title: `Nook ${r.version}`,
+  slug: r.tag,
+  version: r.tag,
+  publishedAt: r.date,
+  summary: r.summary,
+}));
 
 function groupByMonthYear(items: ChangelogEntry[]) {
   const map = new Map<string, ChangelogEntry[]>();

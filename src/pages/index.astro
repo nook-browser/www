@@ -6,13 +6,14 @@ import Header from "../components/Header.astro";
 import SEO from "../components/SEO.astro";
 import { ClientRouter } from "astro:transitions";
 
-import FloatingBanner, {
-  fetchLatestChangelog,
-} from "../components/FloatingBanner.svelte";
+import FloatingBanner from "../components/FloatingBanner.svelte";
+import { fetchReleases } from "../lib/releases";
 import AccordionItem from "../components/AccordionItem.astro";
 import ProgressiveBlur from "../components/ProgressiveBlur.astro";
 
-const latest = await fetchLatestChangelog();
+export const prerender = false;
+
+const latest = (await fetchReleases())[0] ?? null;
 
 const questions = [
   {
