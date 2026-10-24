@@ -12,7 +12,6 @@ export const CORE_TEAM: CoreMember[] = [
     login: "jonathancaudill",
     name: "Jonathan Caudill",
     role: "Project Manager, Lead Developer",
-    email: "support@browsewithnook.com",
   },
   {
     login: "baginski11",
