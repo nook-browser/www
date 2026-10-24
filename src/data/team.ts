@@ -7,6 +7,14 @@ export type CoreMember = {
   email?: string;
 };
 
+export const MAINTAINERS: CoreMember[] = [
+  {
+    login: "l984-451",
+    name: "Bain Gurley",
+    role: "Maintainer",
+  },
+];
+
 export const CORE_TEAM: CoreMember[] = [
   {
     login: "jonathancaudill",

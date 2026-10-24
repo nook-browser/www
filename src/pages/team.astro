@@ -2,7 +2,7 @@
 import Logo from "../components/Logo.svelte";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-import { CORE_TEAM, type CoreMember } from "../data/team";
+import { CORE_TEAM, MAINTAINERS, type CoreMember } from "../data/team";
 import Header from "../components/Header.astro";
 import SEO from "../components/SEO.astro";
 import { ClientRouter } from "astro:transitions";
@@ -46,7 +46,7 @@ const [ghMembers, contributors] = await Promise.all([
 ]).catch(() => [[], []] as [GHUser[], GHContributor[]]);
 
 const loginToGH = new Map(ghMembers.map((m) => [m.login, m] as const));
-const members = CORE_TEAM.map((m) => {
+const toCard = (m: CoreMember) => {
   const gh = m.login ? loginToGH.get(m.login) : undefined;
   return {
     ...m,
@@ -59,7 +59,11 @@ const members = CORE_TEAM.map((m) => {
       gh?.html_url ??
       (m.login ? `https://github.com/${m.login}` : "#"),
   } as CoreMember & { avatar_url: string; html_url: string };
-});
+};
+const sections = [
+  { title: "Maintainer", members: MAINTAINERS.map(toCard) },
+  { title: "Founding team", members: CORE_TEAM.map(toCard) },
+];
 
 // Build refined contributors list (API-based), filter bots/apps and dedupe
 const botRegex = /(bot|apps?)$/i;
@@ -115,6 +119,8 @@ const refinedContributors = Array.from(contributorMap.values());
       </p>
     </section>
 
+    {
+      sections.map((section) => (
     <section
       class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-8"
       data-reveal-parent
@@ -122,14 +128,14 @@ const refinedContributors = Array.from(contributorMap.values());
       <h2
         class="text-sm font-semibold text-[#333333]/70 [font-family:var(--font-rethink)]"
       >
-        Founding team
+        {section.title}
       </h2>
       <ul
         data-reveal
         class="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2"
       >
         {
-          members.map((m) => (
+          section.members.map((m) => (
             <li class="group rounded-2xl p-2 transition will-change-transform hover:-translate-y-0.5">
               <a
                 href={m.html_url}
@@ -178,6 +184,8 @@ const refinedContributors = Array.from(contributorMap.values());
         }
       </ul>
     </section>
+      ))
+    }
 
     <section
       class="container mx-auto max-w-[1120px] px-[clamp(16px,2vw,28px)] pb-16"
