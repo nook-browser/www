@@ -8,6 +8,7 @@ export type Release = {
   date: string; // ISO 8601
   html: string; // release notes, rendered by GitHub
   summary: string; // first line of the notes, as text
+  notes: string[]; // every bullet or paragraph, as text
   url: string; // the release on GitHub
   dmg: string;
 };
@@ -38,13 +39,14 @@ export function parseFeed(xml: string): Release[] {
     // Betas carry a suffix ("v1.1.0-beta.1"); the site lists official releases only.
     if (!/^v\d+\.\d+\.\d+$/.test(tag)) continue;
     const html = unescape(pick(entry, /<content type="html">([\s\S]*?)<\/content>/));
-    const first = html.match(/<(li|p)>([\s\S]*?)<\/\1>/)?.[2] ?? "";
+    const notes = [...html.matchAll(/<(li|p)>([\s\S]*?)<\/\1>/g)].map((m) => text(m[2])).filter(Boolean);
     out.push({
       tag,
       version: tag.slice(1),
       date: pick(entry, /<updated>([^<]+)<\/updated>/),
       html,
-      summary: text(first),
+      summary: notes[0] ?? "",
+      notes,
       url,
       dmg: `${repo}/releases/download/${tag}/Nook-${tag}.dmg`,
     });

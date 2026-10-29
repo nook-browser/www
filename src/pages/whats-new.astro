@@ -16,6 +16,7 @@ type ChangelogEntry = {
   publishedAt?: string;
   createdAt?: string;
   summary?: string;
+  notes?: string[];
 };
 
 export const prerender = false;
@@ -27,6 +28,7 @@ const entries: ChangelogEntry[] = (await fetchReleases()).map((r) => ({
   version: r.tag,
   publishedAt: r.date,
   summary: r.summary,
+  notes: r.notes,
 }));
 
 function groupByMonthYear(items: ChangelogEntry[]) {

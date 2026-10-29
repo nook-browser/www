@@ -8,6 +8,7 @@
     publishedAt?: string;
     date?: string;
     summary?: string;
+    notes?: string[];
   };
 
   type Group = { label: string; items: Entry[] };
@@ -85,10 +86,12 @@
                   {/if}
                 </div>
               </div>
-              {#if entry.summary}
-                <p class="mt-1.5 text-sm text-[#07140f]/60 line-clamp-2 leading-relaxed">
-                  {entry.summary}
-                </p>
+              {#if entry.notes?.length}
+                <ul class="mt-1.5 list-disc pl-5 text-sm text-[#07140f]/60 leading-relaxed">
+                  {#each entry.notes as note}
+                    <li>{note}</li>
+                  {/each}
+                </ul>
               {/if}
             </div>
           </a>
